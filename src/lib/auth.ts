@@ -16,6 +16,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const demoEmail = process.env.PORTAL_DEMO_EMAIL;
         const demoPassword = process.env.PORTAL_DEMO_PASSWORD;
+        const adminEmail = process.env.PORTAL_ADMIN_EMAIL;
+        const adminPassword = process.env.PORTAL_ADMIN_PASSWORD;
+
+        if (email === adminEmail && password === adminPassword) {
+          return {
+            id: "admin",
+            email: adminEmail,
+            name: "Admin User",
+            role: "Admin",
+            clientId: "admin",
+            isAdmin: true,
+          };
+        }
 
         if (email === demoEmail && password === demoPassword) {
           return {
@@ -24,6 +37,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             name: "Demo User",
             role: "Client",
             clientId: "demo-client",
+            isAdmin: false,
           };
         }
 
@@ -44,6 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.email = user.email;
         token.role = user.role;
         token.clientId = user.clientId;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },
@@ -53,6 +68,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.email = token.email as string;
         session.user.role = token.role as any;
         session.user.clientId = token.clientId as string;
+        session.user.isAdmin = token.isAdmin as boolean;
       }
       return session;
     },

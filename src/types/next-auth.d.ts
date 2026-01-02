@@ -5,6 +5,7 @@ declare module "next-auth" {
   interface User {
     role?: UserRole;
     clientId?: string;
+    isAdmin?: boolean;
   }
 
   interface Session {
@@ -12,6 +13,7 @@ declare module "next-auth" {
       id: string;
       role?: UserRole;
       clientId?: string;
+      isAdmin?: boolean;
     } & DefaultSession["user"];
   }
 }
@@ -21,5 +23,6 @@ declare module "next-auth/jwt" {
     id: string;
     role?: UserRole;
     clientId?: string;
+    isAdmin?: boolean;
   }
 }

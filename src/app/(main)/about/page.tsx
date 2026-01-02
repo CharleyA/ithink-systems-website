@@ -33,19 +33,19 @@ const values = [
     {
       name: "Charles Moyo",
       role: "Founding Director & Lead Engineer",
-      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/cefdbd08-3bad-47f2-8b3d-7ddab024a768/charley-pic-1767396449884.jpeg?width=800&height=800&resize=cover",
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/cefdbd08-3bad-47f2-8b3d-7ddab024a768/Charles-Pic-1767298909997.jpeg?width=800&height=800&resize=cover",
       bio: "Systems architect with a focus on practical enterprise technology since 2021."
     },
     {
       name: "Faith Donga",
       role: "Creative Director",
-      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/cefdbd08-3bad-47f2-8b3d-7ddab024a768/faith-pic-1767396449910.jpeg?width=800&height=800&resize=cover",
+      image: "https://ui-avatars.com/api/?name=Faith+Donga&size=400&background=3b82f6&color=fff&bold=true",
       bio: "Leading creative vision and brand strategy for impactful digital experiences."
     },
     {
       name: "Nhlanhla Ndlovu",
       role: "Marketing Director",
-      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/cefdbd08-3bad-47f2-8b3d-7ddab024a768/nhlanhla-pic-1767396449911.jpeg?width=800&height=800&resize=cover",
+      image: "https://ui-avatars.com/api/?name=Nhlanhla+Ndlovu&size=400&background=10b981&color=fff&bold=true",
       bio: "Driving market growth and strategic partnerships across the region."
     },
     {
@@ -57,7 +57,7 @@ const values = [
     {
       name: "Lungelo Sibanda",
       role: "Projects Director",
-      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/cefdbd08-3bad-47f2-8b3d-7ddab024a768/lungelo-pic-1767396449911.jpeg?width=800&height=800&resize=cover",
+      image: "https://ui-avatars.com/api/?name=Lungelo+Sibanda&size=400&background=8b5cf6&color=fff&bold=true",
       bio: "Overseeing project delivery and client success across all implementations."
     }
   ];
