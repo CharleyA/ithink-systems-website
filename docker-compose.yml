@@ -1,0 +1,12 @@
+services:
+  ithinksite:
+    build: .
+    container_name: ithinksite
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    ports:
+      - "127.0.0.1:3000:3000"
