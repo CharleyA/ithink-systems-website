@@ -1,0 +1,4 @@
+
+# Always keep VPS versions for deployment files
+Dockerfile merge=ours
+docker-compose.yml merge=ours
