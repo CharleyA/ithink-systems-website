@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Github, Linkedin } from "lucide-react";
 
 const navigation = {
   solutions: [
@@ -32,19 +32,29 @@ export function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
             <Logo />
-              <p className="text-sm leading-6 text-muted-foreground">
-                Empowering innovation in Zimbabwe through professional technology solutions. Specializing in Healthcare, Education, and AI.
-              </p>
+            <p className="text-sm leading-6 text-muted-foreground">
+              Empowering innovation in Zimbabwe through professional technology solutions. Specializing in Healthcare, Education, and AI.
+            </p>
             <div className="flex gap-x-6">
+              <Link
+                href="https://www.facebook.com/profile.php?id=100084773075035"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary"
+              >
+                <span className="sr-only">Facebook</span>
+                <Facebook className="h-6 w-6" />
+              </Link>
               <Link href="#" className="text-muted-foreground hover:text-primary">
                 <span className="sr-only">LinkedIn</span>
                 <Linkedin className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <span className="sr-only">Twitter</span>
-                <Twitter className="h-6 w-6" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              <Link
+                href="https://github.com/CharleyA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary"
+              >
                 <span className="sr-only">GitHub</span>
                 <Github className="h-6 w-6" />
               </Link>

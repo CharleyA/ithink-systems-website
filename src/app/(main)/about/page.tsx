@@ -6,8 +6,7 @@ import {
   Target, 
   Heart, 
   Lightbulb,
-  Linkedin,
-  Twitter
+  Linkedin
 } from "lucide-react";
 import Link from "next/link";
 
@@ -51,7 +50,7 @@ const values = [
     {
       name: "Graham Chimwanja",
       role: "Accountant",
-      image: "https://ui-avatars.com/api/?name=Graham+Chimwanja&size=400&background=f59e0b&color=fff&bold=true",
+      image: "/images/team/graham-pic.jpeg?width=800&height=800&resize=cover",
       bio: "Ensuring financial integrity and sustainable business operations."
     },
     {
@@ -149,7 +148,6 @@ export default function AboutPage() {
                 <p className="mt-4 text-center text-muted-foreground px-4">{person.bio}</p>
                 <div className="mt-6 flex gap-4">
                   <Link href="#" className="text-muted-foreground hover:text-primary"><Linkedin className="h-5 w-5" /></Link>
-                  <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter className="h-5 w-5" /></Link>
                 </div>
               </li>
             ))}
