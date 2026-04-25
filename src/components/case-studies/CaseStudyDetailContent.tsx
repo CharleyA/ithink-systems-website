@@ -14,6 +14,41 @@ interface CaseStudyDetailContentProps {
 }
 
 export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailContentProps) {
+  const relatedServiceLinks = (() => {
+    if (caseStudy.slug === "erpnext-mpilo") {
+      return [
+        { label: "Healthcare IT Solutions", href: "/healthcare-it-solutions-zimbabwe" },
+        { label: "ERPNext Implementation", href: "/erpnext-implementation-zimbabwe" },
+        { label: "System Development", href: "/system-development-zimbabwe" },
+      ];
+    }
+    if (caseStudy.slug === "eduloan-erp" || caseStudy.slug === "neomed-accounting") {
+      return [
+        { label: "ERPNext & ERP Implementation", href: "/erpnext-implementation-zimbabwe" },
+        { label: "Custom Software Development", href: "/custom-software-development-zimbabwe" },
+        { label: "Application Development", href: "/application-development-zimbabwe" },
+      ];
+    }
+    if (caseStudy.slug === "uce-website" || caseStudy.slug === "golden-60-website" || caseStudy.slug === "dementia-association-website") {
+      return [
+        { label: "Website Development", href: "/website-development-zimbabwe" },
+        { label: "Hosting & Deployment", href: "/hosting-services-zimbabwe" },
+        { label: "IT Company in Bulawayo", href: "/it-company-bulawayo" },
+      ];
+    }
+    if (caseStudy.slug === "calm-health") {
+      return [
+        { label: "Healthcare IT Solutions", href: "/healthcare-it-solutions-zimbabwe" },
+        { label: "Application Development", href: "/application-development-zimbabwe" },
+        { label: "System Development", href: "/system-development-zimbabwe" },
+      ];
+    }
+    return [
+      { label: "Custom Software Development", href: "/custom-software-development-zimbabwe" },
+      { label: "Website Development", href: "/website-development-zimbabwe" },
+      { label: "Case Studies", href: "/case-studies" },
+    ];
+  })();
   const statusColors = {
     Live: "bg-green-500/10 text-green-500 border-green-500/20",
     Pilot: "bg-blue-500/10 text-blue-500 border-blue-500/20",
@@ -171,6 +206,21 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
                       <span key={tech} className="px-3 py-1 bg-muted rounded-full text-xs font-medium">
                         {tech}
                       </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">Relevant Services</h4>
+                  <div className="space-y-2">
+                    {relatedServiceLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center text-sm text-primary hover:underline font-medium"
+                      >
+                        {link.label} <ChevronRight className="ml-1 h-3 w-3" />
+                      </Link>
                     ))}
                   </div>
                 </div>

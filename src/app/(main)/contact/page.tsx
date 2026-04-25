@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
 export default function ContactPage() {
   return (
     <div className="bg-background">
@@ -21,10 +20,9 @@ export default function ContactPage() {
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">Contact Us</h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Have a project in mind or want to learn more about our solutions? We'd love to hear from you.
+            Have a project in mind or want to build a website, application, system, ERP workflow, or hosted platform? We'd love to hear from you.
           </p>
         </div>
-
         <div className="mx-auto mt-20 grid max-w-7xl grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Info */}
           <motion.div 
@@ -39,7 +37,6 @@ export default function ContactPage() {
                 Our team is ready to discuss how iThink Systems can help your organization thrive.
               </p>
             </div>
-
               <div className="space-y-8">
                 {[
                   { 
@@ -54,7 +51,7 @@ export default function ContactPage() {
                   },
                   { 
                     name: "Call Us", 
-                    value: "+263 77 123 4567", 
+                    value: "+263772950432", 
                     icon: Phone 
                   }
                 ].map((item) => (
@@ -69,7 +66,6 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
-
             <div className="rounded-3xl bg-muted/50 p-8">
               <div className="flex items-center gap-4 text-primary">
                 <MessageSquare className="h-8 w-8" />
@@ -80,7 +76,6 @@ export default function ContactPage() {
               </p>
             </div>
           </motion.div>
-
           {/* Contact Form */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}

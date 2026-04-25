@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
 const services = [
   {
     title: "Custom Software Development",
@@ -38,7 +37,6 @@ const services = [
     features: ["Staff Training", "24/7 Support", "System Maintenance", "Performance Monitoring"]
   }
 ];
-
 export default function ServicesPage() {
   return (
     <div className="bg-background">
@@ -49,7 +47,6 @@ export default function ServicesPage() {
               Beyond our products, we offer professional services to help organizations navigate their digital transformation journey in Zimbabwe.
             </p>
         </div>
-
         <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2">
           {services.map((service, index) => (
             <motion.div 
@@ -86,6 +83,19 @@ export default function ServicesPage() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="mt-16 rounded-3xl border bg-muted/30 p-8">
+          <h2 className="text-2xl font-bold text-foreground">Need a website, application, or internal system?</h2>
+          <p className="mt-4 text-muted-foreground">
+            If you already know what you want built, these pages can help you find the right starting point and relevant proof.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold text-primary">
+            <Link href="/website-development-zimbabwe">Website Development →</Link>
+            <Link href="/application-development-zimbabwe">Application Development →</Link>
+            <Link href="/system-development-zimbabwe">System Development →</Link>
+            <Link href="/hosting-services-zimbabwe">Hosting & Deployment →</Link>
+            <Link href="/case-studies">Case Studies →</Link>
+          </div>
         </div>
 
         {/* Process Section */}

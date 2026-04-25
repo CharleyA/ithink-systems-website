@@ -4,10 +4,33 @@ import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Providers } from "@/components/Providers";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { defaultDescription, defaultKeywords, defaultTitle, organizationJsonLd, siteName, siteUrl, websiteJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "iThink Systems | Professional Technology Solutions in Zimbabwe",
-  description: "Specializing in healthcare systems, education platforms, ERPNext implementations, AI-powered software, and custom SaaS development in Zimbabwe.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  keywords: defaultKeywords,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: defaultTitle,
+    description: defaultDescription,
+    url: siteUrl,
+    siteName,
+    type: "website",
+    locale: "en_ZW",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+  },
 };
 
 export default function RootLayout({
@@ -18,7 +41,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased min-h-screen flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+        />
         <Providers>
+          <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
           <Script
             id="orchids-browser-logs"
             src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/orchids-browser-logs.js"

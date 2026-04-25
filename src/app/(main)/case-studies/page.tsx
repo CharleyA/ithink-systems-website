@@ -50,8 +50,7 @@ export default function CaseStudiesPage() {
               transition={{ delay: 0.1 }}
               className="mt-6 text-lg leading-8 text-muted-foreground"
             >
-              Real-world examples of how iThink Systems delivers high-impact technology solutions 
-              across healthcare, education, and enterprise sectors in Zimbabwe.
+              Real-world examples of how iThink Systems delivers websites, applications, ERP implementations, healthcare systems, education platforms, and business software across Zimbabwe. Browse the work to see what we have built and how those systems performed in real operating environments.
             </motion.p>
         </div>
 

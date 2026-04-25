@@ -1,93 +1,138 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Shield, 
-  Zap, 
-  Users, 
-  Lock,
-  ArrowRight
+import {
+  ArrowRight,
+  CheckCircle,
+  Globe,
+  Smartphone,
+  Calculator,
+  Boxes,
+  Shield,
+  HeartPulse,
+  ShoppingBag,
 } from "lucide-react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
 const products = [
   {
-    name: "iHealth Connect",
-    tagline: "The Future of Patient Care",
-    description: "A comprehensive EHR and facility management system designed to work in both connected and offline environments.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop",
-    features: ["Offline Sync", "Multi-facility Support", "Mobile App for Doctors"]
+    name: "Web & App Platforms",
+    tagline: "Modern Digital Experiences",
+    description:
+      "High-performance websites and web applications built with Next.js and TypeScript for speed, reliability, and growth.",
+    icon: Globe,
+    features: ["Next.js Architecture", "TypeScript Codebase", "SEO + Performance Optimized"],
   },
   {
-    name: "iLearn African Portal",
-    tagline: "Education Without Boundaries",
-    description: "An adaptive learning platform that prioritizes low-bandwidth content delivery and local language support.",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2074&auto=format&fit=crop",
-    features: ["Video Compression", "Gamified Learning", "Assessment Engine"]
+    name: "Mobile Business Apps",
+    tagline: "Business in Your Pocket",
+    description:
+      "Cross-platform mobile applications that keep teams, customers, and operations connected in real time.",
+    icon: Smartphone,
+    features: ["Android & iOS Support", "Offline-Ready Workflows", "API Integrations"],
   },
   {
-    name: "iSaaS Core",
-    tagline: "Launch Your Startup Faster",
-    description: "A foundational SaaS framework with built-in multi-tenancy, payments, and African gateway integrations.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    features: ["Local Payment Hooks", "Security First", "Rapid Deployment"]
-  }
+    name: "IPSAS Schools Accounting Suite",
+    tagline: "Compliance-Ready Education Finance",
+    description:
+      "School accounting workflows aligned to IPSAS-aligned reporting expectations with practical controls for institutional finance teams.",
+    icon: Calculator,
+    features: ["Financial Reporting", "Budget & Control", "Audit-Friendly Structure"],
+  },
+  {
+    name: "Warehouse Management Suite",
+    tagline: "Smarter Stock Control",
+    description:
+      "Inventory, receiving, issuing, and stock tracking tools designed to reduce leakage and improve visibility across stores.",
+    icon: Boxes,
+    features: ["Stock Movement Tracking", "Reorder Intelligence", "Multi-Store Support"],
+  },
+  {
+    name: "Insurance Management Platform",
+    tagline: "Policy & Claims Operations",
+    description:
+      "Digitized insurance administration for member management, policy workflows, claims processing, and operational reporting.",
+    icon: Shield,
+    features: ["Member Administration", "Claims Workflow", "Operational Dashboards"],
+  },
+  {
+    name: "Patient Management System",
+    tagline: "Care-Focused Clinical Operations",
+    description:
+      "Integrated patient and facility workflows supporting registration, clinical records, and service coordination.",
+    icon: HeartPulse,
+    features: ["Patient Records", "Facility Workflow Support", "Clinical Data Access"],
+  },
+  {
+    name: "Retail Management Suite",
+    tagline: "End-to-End Retail Operations",
+    description:
+      "A practical retail operations platform connecting products, sales, stock, and reporting in one system.",
+    icon: ShoppingBag,
+    features: ["Sales & POS Flows", "Stock + Pricing Control", "Retail Performance Insights"],
+  },
+  {
+    name: "AI Integration & Enablement",
+    tagline: "Practical AI for Real Workflows",
+    description:
+      "Applied AI integration services to embed automation, assistants, and intelligent decision support into existing business systems.",
+    icon: Shield,
+    features: ["Workflow AI Integration", "AI Readiness Advisory", "Team Enablement & Training"],
+  },
+  {
+    name: "Managed Support Services",
+    tagline: "Reliable Ongoing Support",
+    description:
+      "Structured technical support and system care to keep operations stable, secure, and continuously improving.",
+    icon: CheckCircle,
+    features: ["Issue Resolution", "System Monitoring", "Continuous Improvement Support"],
+  },
 ];
-
 export default function ProductsPage() {
   return (
     <div className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-base font-semibold leading-7 text-primary">Our Products</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Innovating for the Digital Frontier
-          </p>
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">Our Products</h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Our flagship products are built on years of experience and a deep understanding of the African market.
+            Purpose-built digital products designed for real institutional and business operations in Zimbabwe and beyond.
           </p>
         </div>
-
-        <div className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {products.map((product) => (
-            <motion.div 
+        <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {products.map((product, index) => (
+            <motion.div
               key={product.name}
-              whileHover={{ y: -10 }}
-              className="flex flex-col overflow-hidden rounded-2xl bg-card border shadow-sm transition-all hover:shadow-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="flex flex-col bg-card p-8 rounded-3xl border shadow-sm hover:shadow-md transition-all"
             >
-              <div className="relative aspect-[16/9] w-full">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="rounded-2xl bg-primary/10 p-3 text-primary">
+                  <product.icon className="h-7 w-7" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-primary/80">{product.tagline}</p>
+                  <h2 className="text-xl font-bold text-foreground">{product.name}</h2>
+                </div>
               </div>
-              <div className="flex flex-1 flex-col p-8">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-primary uppercase tracking-wider">{product.tagline}</p>
-                  <h3 className="mt-2 text-2xl font-bold text-foreground">{product.name}</h3>
-                  <p className="mt-4 text-base text-muted-foreground leading-relaxed">
-                    {product.description}
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {product.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-foreground font-medium">
-                        <Zap className="h-4 w-4 text-primary" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-8">
-                  <Button variant="outline" className="w-full group" asChild>
-                    <Link href="/contact">
-                      Request Demo <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
+              <p className="text-muted-foreground mb-8 leading-relaxed">{product.description}</p>
+              <ul className="grid grid-cols-1 gap-3 mt-auto">
+                {product.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-foreground font-medium text-sm">
+                    <CheckCircle className="h-4 w-4 text-primary flex-none" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 pt-6 border-t">
+                <Button variant="link" className="px-0 text-primary font-bold group" asChild>
+                  <Link href="/contact">
+                    Talk to us about this solution
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           ))}

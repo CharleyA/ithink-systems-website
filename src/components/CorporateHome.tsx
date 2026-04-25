@@ -135,6 +135,7 @@ const featuredProjects = [
   { label: "Institutions Supported", value: "18+" },
   { label: "Registered Since", value: "2021" },
   { label: "Flagship ERPs", value: "2" },
+  { label: "SaaS Builds", value: "15+" },
   { label: "Base Location", value: "Bulawayo" },
 ];
 
@@ -151,14 +152,17 @@ export function CorporateHome() {
               transition={{ duration: 0.8 }}
             >
                   <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-                    Enterprise-Grade Systems Built for Zimbabwe
+                    Healthcare IT, ERPNext & Custom Software Built for Zimbabwe
                   </h1>
                   <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                    From our base in Bulawayo, we build robust technology tailored to local operational realities—powering healthcare, education, ERP, and secure cloud platforms.
+                    From our base in Bulawayo, iThink Systems delivers healthcare IT solutions, ERPNext implementation, education platforms, AI integration, and custom software development tailored to local operational realities in Zimbabwe.
                   </p>
               <div className="mt-10 flex items-center gap-x-6">
                 <Button size="lg" asChild>
                   <Link href="/solutions">Explore Solutions</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/custom-software-development-zimbabwe">Custom Software</Link>
                 </Button>
                 <Link href="/about" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors flex items-center gap-1">
                   Our local commitment <ArrowRight className="h-4 w-4" />
@@ -191,7 +195,7 @@ export function CorporateHome() {
         {/* Stats Section */}
         <section className="bg-muted/30 py-16">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <dl className="grid grid-cols-2 gap-x-8 gap-y-12 text-center lg:grid-cols-4">
+            <dl className="grid grid-cols-2 gap-x-8 gap-y-12 text-center lg:grid-cols-5">
               {stats.map((stat) => (
                 <div key={stat.label} className="mx-auto flex max-w-xs flex-col gap-y-2">
                   <dt className="text-base leading-7 text-muted-foreground">{stat.label}</dt>
@@ -419,15 +423,23 @@ export function CorporateHome() {
               Ready to modernize your operations?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
-              Partner with a Bulawayo-based team that prioritizes practical, scalable, and professional technology.
+              Partner with a Bulawayo-based technology company focused on practical, scalable, and professional digital systems for organizations in Zimbabwe.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Button size="lg" asChild>
                 <Link href="/contact">Get Started Today</Link>
               </Button>
-              <Link href="/solutions" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
-                View our core systems <span aria-hidden="true">→</span>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 text-sm font-semibold leading-6">
+                <Link href="/solutions" className="text-foreground hover:text-primary transition-colors">
+                  View our core systems <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/website-development-zimbabwe" className="text-foreground hover:text-primary transition-colors">
+                  Website development <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/application-development-zimbabwe" className="text-foreground hover:text-primary transition-colors">
+                  Application development <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

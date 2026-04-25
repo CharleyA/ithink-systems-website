@@ -179,7 +179,7 @@ export const caseStudies: CaseStudy[] = [
     client: 'United College of Education',
     industry: 'Education',
     services: ['Web Development'],
-    year: 2023,
+    year: 2025,
     location: 'Bulawayo, Zimbabwe',
     status: 'Live',
     featured: false,
@@ -200,6 +200,127 @@ export const caseStudies: CaseStudy[] = [
       'Scalable foundation for future digital academic services.'
     ],
     techStack: ['Next.js', 'React', 'Tailwind CSS'],
+    links: [{ label: 'Visit Website', url: 'https://uce.ac.zw/' }],
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    slug: 'golden-60-website',
+    title: 'Website Development — Golden 60',
+    client: 'Golden 60',
+    industry: 'Services',
+    services: ['Web Development'],
+    year: 2026,
+    location: 'Zimbabwe',
+    status: 'Live',
+    featured: false,
+    summary: 'Design and development of a modern corporate website to strengthen Golden 60\'s digital presence and brand visibility.',
+    challenge: [
+      'Need for a cleaner and more credible online presence.',
+      'Requirement for a professional website that clearly communicates the organisation\'s brand and offering.',
+      'Need for a responsive experience that works well across desktop and mobile devices.'
+    ],
+    solution: [
+      'Designed and developed a polished corporate website aligned to the Golden 60 brand.',
+      'Structured the site to present company information clearly and professionally.',
+      'Implemented a responsive front-end for an accessible browsing experience across devices.'
+    ],
+    outcomes: [
+      'Established a stronger digital presence for Golden 60.',
+      'Improved the presentation of the organisation to clients, partners, and visitors online.',
+      'Delivered a professional website foundation that supports brand visibility and engagement.'
+    ],
+    techStack: ['Next.js', 'React', 'Tailwind CSS'],
+    links: [{ label: 'Visit Website', url: 'https://golden60.co.zw/' }],
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    slug: 'dementia-association-website',
+    title: 'Website Development — Dementia Association of Zimbabwe',
+    client: 'Dementia Association of Zimbabwe',
+    industry: 'Healthcare',
+    services: ['Web Development'],
+    year: 2026,
+    location: 'Zimbabwe',
+    status: 'Live',
+    featured: false,
+    summary: 'Design and development of a professional website to strengthen the organisation’s digital presence, public awareness, and stakeholder engagement.',
+    challenge: [
+      'Need for a credible and informative online presence for advocacy and awareness work.',
+      'Requirement for a professional website that clearly communicates the organisation’s mission, programmes, and public value.',
+      'Need for a responsive and accessible experience for visitors across devices.'
+    ],
+    solution: [
+      'Designed and developed a modern organisational website aligned to the Dementia Association of Zimbabwe brand.',
+      'Structured the site to present information clearly for supporters, partners, and the public.',
+      'Implemented a responsive front-end to improve accessibility and user experience across desktop and mobile.'
+    ],
+    outcomes: [
+      'Established a stronger digital presence for the organisation.',
+      'Improved public access to information about dementia awareness and the association’s work.',
+      'Delivered a professional platform that supports visibility, credibility, and engagement.'
+    ],
+    techStack: ['Next.js', 'React', 'Tailwind CSS'],
+    links: [{ label: 'Visit Website', url: 'https://dementiazim.co.zw/' }],
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    slug: 'ipsas-demo-school-accounting-finance-platform',
+    title: 'IPSAS Demo — School Accounting & Finance Platform',
+    client: 'iThink Systems',
+    industry: 'Education',
+    services: ['Web Development', 'Custom SaaS', 'Accounting Systems'],
+    year: 2026,
+    location: 'Zimbabwe',
+    status: 'Live',
+    featured: false,
+    summary: 'Design and development of a school accounting and finance demo platform showcasing digital financial management for educational institutions.',
+    challenge: [
+      'Need for a practical demonstration platform tailored to school finance operations.',
+      'Requirement for a clear and professional interface to showcase accounting workflows for educational institutions.',
+      'Need for a web-based system that demonstrates modern school financial management capabilities.'
+    ],
+    solution: [
+      'Developed a web-based school accounting and finance demo platform for institutional use cases.',
+      'Structured the platform to showcase finance, accounting, and reporting workflows relevant to schools.',
+      'Implemented an accessible and professional interface suitable for demonstrations and stakeholder engagement.'
+    ],
+    outcomes: [
+      'Provided a practical platform for demonstrating school finance digitisation.',
+      'Improved the presentation of iThink Systems\' accounting capabilities for the education sector.',
+      'Created a strong demo foundation for product discussions, onboarding, and stakeholder presentations.'
+    ],
+    techStack: ['Next.js', 'React', 'Tailwind CSS'],
+    links: [{ label: 'Visit Website', url: 'https://ipsas-demo.ithinksys.co.zw/' }],
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    slug: 'clinicflow-patient-management-system',
+    title: 'ClinicFlow — Patient Management System',
+    client: 'iThink Systems',
+    industry: 'Healthcare',
+    services: ['Custom SaaS', 'Digital Transformation'],
+    year: 2026,
+    location: 'Zimbabwe',
+    status: 'Live',
+    featured: false,
+    summary: 'Design and development of a patient management system to support digital clinic operations and streamlined healthcare workflows.',
+    challenge: [
+      'Need for a modern digital platform to support patient and clinic management workflows.',
+      'Requirement for a clear and efficient system for presenting healthcare administration capabilities.',
+      'Need for a web-based solution that improves process visibility and operational efficiency in clinical settings.'
+    ],
+    solution: [
+      'Developed ClinicFlow as a digital patient management system for healthcare workflows.',
+      'Structured the platform to support streamlined patient-related processes and operational visibility.',
+      'Implemented a professional web interface suitable for healthcare demonstrations and product engagement.'
+    ],
+    outcomes: [
+      'Provided a strong digital platform for demonstrating patient management workflows.',
+      'Improved the presentation of iThink Systems\' healthcare technology capabilities.',
+      'Created a scalable foundation for further healthcare workflow digitisation.'
+    ],
+    techStack: ['Next.js', 'React', 'Tailwind CSS'],
+    links: [{ label: 'Visit Website', url: 'https://clinicflow.ithinksys.co.zw/' }],
+    image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop'
   }
 ];

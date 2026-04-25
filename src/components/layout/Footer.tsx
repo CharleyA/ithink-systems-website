@@ -10,6 +10,13 @@ const navigation = {
     { name: "AI Software", href: "/solutions#ai" },
     { name: "Custom SaaS", href: "/solutions#saas" },
   ],
+  build: [
+    { name: "Website Development", href: "/website-development-zimbabwe" },
+    { name: "Application Development", href: "/application-development-zimbabwe" },
+    { name: "System Development", href: "/system-development-zimbabwe" },
+    { name: "Custom Software", href: "/custom-software-development-zimbabwe" },
+    { name: "Hosting & Deployment", href: "/hosting-services-zimbabwe" },
+  ],
   company: [
     { name: "About Us", href: "/about" },
     { name: "Services", href: "/services" },
@@ -45,7 +52,11 @@ export function Footer() {
                 <span className="sr-only">Facebook</span>
                 <Facebook className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              <Link href="https://www.linkedin.com/in/nhlanhla-ndlovu-7772442bb?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary"
+              >
                 <span className="sr-only">LinkedIn</span>
                 <Linkedin className="h-6 w-6" />
               </Link>
@@ -66,6 +77,18 @@ export function Footer() {
                 <h3 className="text-sm font-semibold leading-6 text-foreground">Solutions</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.solutions.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-10 md:mt-0">
+                <h3 className="text-sm font-semibold leading-6 text-foreground">Build & Delivery</h3>
+                <ul role="list" className="mt-6 space-y-4">
+                  {navigation.build.map((item) => (
                     <li key={item.name}>
                       <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
                         {item.name}

@@ -25,7 +25,6 @@ export function Navbar({ variant }: NavbarProps) {
 
   const navigation: NavItem[] = React.useMemo(() => {
     const corporateUrl = "https://ithinksys.co.zw";
-    const productsUrl = "https://products.ithinksys.co.zw";
     const demoUrl = "https://demo.ithinksys.co.zw";
 
     if (variant === "products") {
@@ -50,7 +49,8 @@ export function Navbar({ variant }: NavbarProps) {
         { name: "Home", href: "/" },
         { name: "About Us", href: "/about" },
         { name: "Solutions", href: "/solutions" },
-        { name: "Products", href: `${productsUrl}/`, external: true },
+        { name: "Build", href: "/custom-software-development-zimbabwe" },
+        { name: "Products", href: "/products" },
         { name: "Case Studies", href: "/case-studies" },
         { name: "Contact", href: "/contact" },
         { name: "Client Portal", href: "/portal" },
