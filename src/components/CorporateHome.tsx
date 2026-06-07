@@ -17,7 +17,8 @@ import {
   Monitor,
   Cloud,
   Server,
-  Activity
+  Activity,
+  MonitorSmartphone
 } from "lucide-react";
 import Image from "next/image";
 
@@ -45,7 +46,7 @@ const solutions = [
   },
     {
       title: "Custom Automation & Workflow Tools",
-      description: "Purpose-built automation and assessment tools designed for specific organizational needs.",
+      description: "Purpose-built automation, integration, and Windows business applications designed for specific organizational needs.",
       icon: Cpu,
       color: "text-purple-600",
       bg: "bg-purple-50"
@@ -101,13 +102,20 @@ const featuredProjects = [
         tag: "Zimbabwe • IT Infrastructure",
         icon: Monitor,
         image: "https://images.unsplash.com/photo-1573166364524-d9dbfd8bbf83?q=80&w=2070&auto=format&fit=crop"
+      },
+      {
+        title: "Daily Till Cash-Up Management System — Gokwe North RDC",
+        outcome: "Windows-based Sage 200 Evolution cash-up, reconciliation, reporting, and multi-currency control for end-of-day retail operations.",
+        tag: "Zimbabwe • Windows + Sage Integration",
+        icon: MonitorSmartphone,
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2070&auto=format&fit=crop"
       }
     ];
 
   const enablementCapabilities = [
     {
       title: "Enterprise Systems Development & ERP",
-      description: "Architecting robust backend systems and custom ERP modules that form the backbone of modern business operations.",
+      description: "Architecting robust backend systems, Windows business applications, and custom ERP modules that form the backbone of modern business operations.",
       icon: Database,
       image: "https://images.unsplash.com/photo-1573497491208-6b1acb260507?q=80&w=2070&auto=format&fit=crop"
     },
@@ -155,7 +163,7 @@ export function CorporateHome() {
                     Healthcare IT, ERPNext & Custom Software Built for Zimbabwe
                   </h1>
                   <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                    From our base in Bulawayo, iThink Systems delivers healthcare IT solutions, ERPNext implementation, education platforms, AI integration, and custom software development tailored to local operational realities in Zimbabwe.
+                    From our base in Bulawayo, iThink Systems delivers healthcare IT solutions, ERPNext implementation, education platforms, Windows business applications, AI integration, and custom software development tailored to local operational realities in Zimbabwe.
                   </p>
               <div className="mt-10 flex items-center gap-x-6">
                 <Button size="lg" asChild>

@@ -11,6 +11,7 @@ import {
   Shield,
   HeartPulse,
   ShoppingBag,
+  MonitorSmartphone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -70,6 +71,14 @@ const products = [
       "A practical retail operations platform connecting products, sales, stock, and reporting in one system.",
     icon: ShoppingBag,
     features: ["Sales & POS Flows", "Stock + Pricing Control", "Retail Performance Insights"],
+  },
+  {
+    name: "Daily Till Cash-Up Management System",
+    tagline: "Windows + Sage Cash-Up Control",
+    description:
+      "A Windows-based cash-up and reconciliation application integrated with Sage 200 Evolution to manage end-of-day till balancing, reporting, and multi-currency control.",
+    icon: MonitorSmartphone,
+    features: ["Sage 200 Evolution Integration", "Multi-Currency Cash-Up", "PDF & Excel Reporting"],
   },
   {
     name: "AI Integration & Enablement",

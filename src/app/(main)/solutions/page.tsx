@@ -9,6 +9,7 @@ import {
   Cloud,
   Server,
   CheckCircle2,
+  MonitorSmartphone,
 } from "lucide-react";
 import Image from "next/image";
 const solutions = [
@@ -62,15 +63,17 @@ const solutions = [
   },
   {
     id: "automation",
-    title: "Advanced Data & Integration",
+    title: "Advanced Data, Integration & Windows Business Apps",
     description:
-      "Leveraging structured data and automation to solve complex local organizational challenges.",
+      "Leveraging structured data, automation, and desktop software engineering to solve complex local organizational challenges.",
     features: [
       "Business Intelligence & Reporting",
       "Legacy System Integrations",
       "Automated Data Collection",
       "Custom API Development",
       "Workflow Optimization",
+      "Windows Desktop Applications",
+      "Sage & Line-of-Business Integrations",
     ],
     icon: Cpu,
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop",
@@ -111,6 +114,22 @@ const solutions = [
     bg: "bg-cyan-50",
   },
   {
+    id: "windows-business-apps",
+    title: "Windows Business Applications",
+    description: "Custom desktop software for finance, retail, reconciliation, and reporting workflows where Windows remains the operational backbone.",
+    features: [
+      "Windows x64 Deployment Packages",
+      "SQL Server-Backed Applications",
+      "Operational Dashboards & Reporting",
+      "Cash-Up, Reconciliation & Audit Workflows",
+      "Sage 200 Evolution Integrations",
+    ],
+    icon: MonitorSmartphone,
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+    color: "text-indigo-600",
+    bg: "bg-indigo-50",
+  },
+  {
     id: "infrastructure",
     title: "IT Infrastructure & Technology Enablement",
     description: "The foundation that enables successful digital transformation.",
@@ -134,7 +153,7 @@ export default function SolutionsPage() {
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">Our Solutions</h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            We provide specialized technology solutions for healthcare, education, enterprise operations, and AI-enabled customer support.
+            We provide specialized technology solutions for healthcare, education, enterprise operations, Windows business software, and AI-enabled customer support.
           </p>
         </div>
         <div className="mt-20 space-y-24">

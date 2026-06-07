@@ -1,5 +1,5 @@
-export type Industry = 'Healthcare' | 'Education' | 'Manufacturing' | 'Finance' | 'Technology' | 'Services';
-export type Service = 'ERPNext Implementation' | 'Custom SaaS' | 'Advanced Automation' | 'Digital Transformation' | 'Cloud Migration' | 'Web Development' | 'Accounting Systems' | 'ERP Development';
+export type Industry = 'Healthcare' | 'Education' | 'Manufacturing' | 'Finance' | 'Technology' | 'Services' | 'Retail';
+export type Service = 'ERPNext Implementation' | 'Custom SaaS' | 'Advanced Automation' | 'Digital Transformation' | 'Cloud Migration' | 'Web Development' | 'Accounting Systems' | 'ERP Development' | 'Windows Application Development' | 'Systems Integration';
 export type Status = 'Live' | 'Pilot' | 'In Progress';
 
 export interface Metric {
@@ -322,5 +322,39 @@ export const caseStudies: CaseStudy[] = [
     techStack: ['Next.js', 'React', 'Tailwind CSS'],
     links: [{ label: 'Visit Website', url: 'https://clinicflow.ithinksys.co.zw/' }],
     image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    slug: 'daily-till-cash-up-gokwe',
+    title: 'Daily Till Cash-Up Management System — Gokwe North RDC',
+    client: 'Gokwe North Rural District Council',
+    industry: 'Retail',
+    services: ['Windows Application Development', 'Systems Integration', 'Accounting Systems'],
+    year: 2026,
+    location: 'Zimbabwe',
+    status: 'Live',
+    featured: true,
+    summary: 'A Windows desktop cash-up and reconciliation system integrated with Sage 200 Evolution to improve end-of-day till balancing, reporting, and multi-currency control.',
+    metrics: [
+      { label: 'Platform', value: 'Windows x64' },
+      { label: 'Integration', value: 'Sage 200 Evolution' },
+      { label: 'Currencies', value: 'USD + ZWG' },
+    ],
+    challenge: [
+      'Daily till cash-up depended on Sage source data that needed to be consolidated into a controlled reconciliation workflow.',
+      'Mixed-currency drawer handling risked incorrect totals when USD and ZWG values were combined.',
+      'Finance teams needed practical end-of-day reporting, branch and till filtering, and auditable reconciliation outputs.'
+    ],
+    solution: [
+      'Built a .NET 8 WPF desktop application with SQL Server, Dapper, and QuestPDF for day-to-day cashier and finance operations.',
+      'Integrated Sage 200 Evolution POS transaction data through a staging-based SQL import layer into a dedicated TillCashUpDB.',
+      'Delivered cash-up generation, physical-count reconciliation, variance tracking, and PDF/Excel exports with configurable deployment settings.'
+    ],
+    outcomes: [
+      'Separated drawer totals correctly by currency, avoiding mixed-currency cash-up errors.',
+      'Created a controlled and repeatable end-of-day cash-up workflow for branch, till, cashier, shift, and tender analysis.',
+      'Delivered a reusable Windows deployment package with database scripts and configurable connection settings for rollout across SQL Server environments.'
+    ],
+    techStack: ['.NET 8 WPF', 'MVVM', 'Dapper', 'SQL Server', 'ClosedXML', 'QuestPDF'],
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2070&auto=format&fit=crop'
   }
 ];
