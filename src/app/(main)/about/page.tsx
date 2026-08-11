@@ -58,6 +58,12 @@ const values = [
       role: "Projects Director",
       image: "/images/team/lungelo-pic.jpeg?width=800&height=800&resize=cover",
       bio: "Overseeing project delivery and client success across all implementations."
+    },
+    {
+      name: "Christopher Matambanadzo",
+      role: "Implementation Officer",
+      image: "/images/team/christopher-matambanadzo.jpeg",
+      bio: "Supporting successful system rollouts, user onboarding, and client adoption."
     }
   ];
 
