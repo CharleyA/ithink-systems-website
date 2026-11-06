@@ -147,7 +147,31 @@ const featuredProjects = [
   { label: "Base Location", value: "Bulawayo" },
 ];
 
-export function CorporateHome() {
+export type HomePost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  dateLabel: string;
+  coverImage: string | null;
+};
+
+export type HomeProduct = {
+  slug: string;
+  name: string;
+  summary: string;
+  category: string;
+  priceLabel: string;
+  image: string | null;
+};
+
+export function CorporateHome({
+  latestPosts = [],
+  featuredProducts = [],
+}: {
+  latestPosts?: HomePost[];
+  featuredProducts?: HomeProduct[];
+}) {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -159,14 +183,20 @@ export function CorporateHome() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-                  <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#EC5A24]">
+                    Bulawayo · Since 2021
+                  </p>
+                  <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
                     Healthcare IT, ERPNext & Custom Software Built for Zimbabwe
                   </h1>
                   <p className="mt-6 text-lg leading-8 text-muted-foreground">
                     From our base in Bulawayo, iThink Systems delivers healthcare IT solutions, ERPNext implementation, education platforms, Windows business applications, AI integration, and custom software development tailored to local operational realities in Zimbabwe.
                   </p>
-              <div className="mt-10 flex items-center gap-x-6">
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <Button size="lg" asChild>
+                  <Link href="/contact">Talk to us</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
                   <Link href="/solutions">Explore Solutions</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
@@ -176,6 +206,9 @@ export function CorporateHome() {
                   Our local commitment <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-6 text-sm font-medium text-[#5F5F5F]">
+                Mpilo Central Hospital · 18+ education institutions · CALM Health · United College of Education
+              </p>
             </motion.div>
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
@@ -183,7 +216,7 @@ export function CorporateHome() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-                <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-muted shadow-2xl">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted shadow-2xl">
                   <Image
                     src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop"
                     alt="African professional software engineer working in a modern office"
@@ -216,6 +249,44 @@ export function CorporateHome() {
           </div>
         </section>
 
+        <section className="bg-background py-24">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div className="max-w-2xl">
+                <h2 className="text-base font-semibold leading-7 text-[#EC5A24]">Products</h2>
+                <p className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Featured systems</p>
+                <p className="mt-4 text-lg leading-8 text-muted-foreground">
+                  Platforms we run for hospitals, schools, and operators who need software that fits local conditions.
+                </p>
+              </div>
+              <Link href="/products" className="text-sm font-semibold text-[#EC5A24]">
+                See the full catalogue →
+              </Link>
+            </div>
+            {featuredProducts.length === 0 ? (
+              <p className="mt-10 text-muted-foreground">Featured products will show here once they are published.</p>
+            ) : (
+              <div className="mt-12 grid gap-6 lg:grid-cols-3">
+                {featuredProducts.map((product) => (
+                  <Link key={product.slug} href={`/products/${product.slug}`} className="flex flex-col overflow-hidden rounded-3xl border bg-card hover:shadow-md">
+                    {product.image ? (
+                      <img src={product.image} alt="" className="h-40 w-full object-cover" />
+                    ) : (
+                      <div className="h-2 bg-[#EC5A24]" />
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[#EC5A24]">{product.category}</p>
+                      <h3 className="mt-2 text-xl font-bold">{product.name}</h3>
+                      <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{product.summary}</p>
+                      <p className="mt-6 text-sm font-semibold text-[#5F5F5F]">{product.priceLabel}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* Featured Zimbabwe Projects */}
         <section className="py-24 bg-background">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -229,6 +300,11 @@ export function CorporateHome() {
               <p className="mt-6 text-lg leading-8 text-muted-foreground">
                 Delivering impact through robust technical implementations for leading local institutions.
               </p>
+            </div>
+            <div className="mt-10 text-center">
+              <Button variant="outline" asChild>
+                <Link href="/case-studies">Read the case studies</Link>
+              </Button>
             </div>
             <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                 {featuredProjects.map((project, idx) => (
@@ -420,6 +496,44 @@ export function CorporateHome() {
                 </div>
               </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-[#FDEEE8] py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <h2 className="text-base font-semibold leading-7 text-[#EC5A24]">Journal</h2>
+              <p className="mt-2 text-3xl font-bold tracking-tight text-[#1A1A1A] sm:text-4xl">Latest from the blog</p>
+              <p className="mt-4 text-lg leading-8 text-[#5F5F5F]">
+                Educational notes our team publishes for operators of healthcare, education, and business systems.
+              </p>
+            </div>
+            <Link href="/blog" className="text-sm font-semibold text-[#EC5A24]">
+              All articles →
+            </Link>
+          </div>
+          {latestPosts.length === 0 ? (
+            <p className="mt-10 text-[#5F5F5F]">New articles are published here through the week.</p>
+          ) : (
+            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              {latestPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="flex flex-col overflow-hidden rounded-3xl border border-[#E6E6E6] bg-white">
+                  {post.coverImage ? (
+                    <img src={post.coverImage} alt="" className="h-40 w-full object-cover" />
+                  ) : (
+                    <div className="h-2 bg-[#EC5A24]" />
+                  )}
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#EC5A24]">{post.category}</p>
+                    <h3 className="mt-2 text-xl font-bold text-[#1A1A1A]">{post.title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-6 text-[#5F5F5F]">{post.excerpt}</p>
+                    {post.dateLabel && <p className="mt-6 text-xs text-[#5F5F5F]">{post.dateLabel}</p>}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

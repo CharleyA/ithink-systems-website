@@ -1,3 +1,4 @@
+/** Static fallback for the products subdomain if the database is down. The live catalogue is the Product table. */
 export interface Product {
   id: string;
   name: string;

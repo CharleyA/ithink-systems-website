@@ -1,4 +1,4 @@
-import { DefaultSession } from "next-auth";
+import type { DefaultSession } from "next-auth";
 import { UserRole } from "@/content/portal/types";
 
 declare module "next-auth" {

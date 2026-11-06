@@ -1,3 +1,5 @@
+// Legacy helper. Portal and admin sessions are issued by NextAuth in src/lib/auth.ts.
+// Nothing in the UI reads the portal_session cookie.
 import { cookies } from "next/headers";
 import { SignJWT, jwtVerify } from "jose";
 

@@ -1,7 +1,17 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { authConfig } from "@/lib/auth.config";
+import { resolvePortalLogin } from "@/lib/portal-auth";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
+
+class LoginRateLimited extends CredentialsSignin {
+  code = "rate_limited";
+}
+
+const WINDOW_MS = 15 * 60 * 1000;
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       id: "credentials",
@@ -10,67 +20,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        const email = credentials?.email as string;
-        const password = credentials?.password as string;
+      async authorize(credentials, request) {
+        const email = String(credentials?.email ?? "").trim();
+        const password = String(credentials?.password ?? "");
+        if (!email || !password) return null;
 
-        const demoEmail = process.env.PORTAL_DEMO_EMAIL;
-        const demoPassword = process.env.PORTAL_DEMO_PASSWORD;
-        const adminEmail = process.env.PORTAL_ADMIN_EMAIL;
-        const adminPassword = process.env.PORTAL_ADMIN_PASSWORD;
-
-        if (email === adminEmail && password === adminPassword) {
-          return {
-            id: "admin",
-            email: adminEmail,
-            name: "Admin User",
-            role: "Admin",
-            clientId: "admin",
-            isAdmin: true,
-          };
+        const ip = clientIp(request);
+        const byEmail = rateLimit(`login:email:${email.toLowerCase()}`, 8, WINDOW_MS);
+        const byIp = rateLimit(`login:ip:${ip}`, 30, WINDOW_MS);
+        if (!byEmail.ok || !byIp.ok) {
+          throw new LoginRateLimited();
         }
 
-        if (email === demoEmail && password === demoPassword) {
-          return {
-            id: "1",
-            email: demoEmail,
-            name: "Demo User",
-            role: "Client",
-            clientId: "demo-client",
-            isAdmin: false,
-          };
-        }
-
-        return null;
+        return resolvePortalLogin(email, password);
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
-  pages: {
-    signIn: "/portal/login",
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.role = user.role;
-        token.clientId = user.clientId;
-        token.isAdmin = user.isAdmin;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id as string;
-        session.user.email = token.email as string;
-        session.user.role = token.role as any;
-        session.user.clientId = token.clientId as string;
-        session.user.isAdmin = token.isAdmin as boolean;
-      }
-      return session;
-    },
-  },
 });

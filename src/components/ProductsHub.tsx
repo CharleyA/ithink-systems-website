@@ -2,10 +2,18 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { products } from "@/content/products";
 import { CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
 
-export function ProductsHub() {
+export type HubProduct = {
+  id: string;
+  name: string;
+  summary: string;
+  features: string[];
+  demoUrl: string | null;
+  contactUrl: string;
+};
+
+export function ProductsHub({ products }: { products: HubProduct[] }) {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -66,12 +74,14 @@ export function ProductsHub() {
               </div>
 
               <div className="p-8 pt-0 mt-auto flex flex-col gap-3">
-                <Button className="w-full justify-between group/btn" asChild>
-                  <Link href={product.demoUrl}>
-                    Request Demo
-                    <ExternalLink className="h-4 w-4 ml-2 opacity-70 group-hover/btn:opacity-100 transition-opacity" />
-                  </Link>
-                </Button>
+                {product.demoUrl && (
+                  <Button className="w-full justify-between group/btn" asChild>
+                    <Link href={product.demoUrl}>
+                      Request Demo
+                      <ExternalLink className="h-4 w-4 ml-2 opacity-70 group-hover/btn:opacity-100 transition-opacity" />
+                    </Link>
+                  </Button>
+                )}
                 <Button variant="outline" className="w-full" asChild>
                   <Link href={product.contactUrl}>
                     Contact Sales
