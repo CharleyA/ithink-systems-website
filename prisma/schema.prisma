@@ -12,6 +12,17 @@ enum UserRole {
   Client
 }
 
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum ProductStatus {
+  LIVE
+  DEMO
+  COMING_SOON
+}
+
 model PortalUser {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -23,4 +34,54 @@ model PortalUser {
   active       Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model Post {
+  id             String     @id @default(cuid())
+  title          String
+  slug           String     @unique
+  excerpt        String
+  body           String
+  coverImage     String?
+  category       String
+  tags           String[]
+  author         String
+  status         PostStatus @default(DRAFT)
+  publishedAt    DateTime?
+  seoTitle       String?
+  seoDescription String?
+  ogImage        String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([category])
+}
+
+model Product {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  tagline     String
+  description String
+  audience    String
+  status      ProductStatus @default(LIVE)
+  demoUrl     String?
+  image       String?
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([sortOrder])
+}
+
+/// Uploaded images. Bytes live in Postgres so a container rebuild cannot drop them.
+/// A copy is also written under UPLOAD_DIR (a Docker volume) for local serving.
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  mimeType  String
+  size      Int
+  bytes     Bytes
+  createdAt DateTime @default(now())
 }

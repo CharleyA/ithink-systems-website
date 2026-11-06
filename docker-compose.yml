@@ -1,12 +1,43 @@
+# Postgres credentials are not stored in this file.
+# Compose interpolates ${POSTGRES_PASSWORD} from the project `.env` file or the shell.
+# The Next.js app still reads `.env.local` (including DATABASE_URL) via env_file.
 services:
+  postgres:
+    image: postgres:16
+    container_name: ithinksite-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ithink}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-ithinksite}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-ithink} -d $${POSTGRES_DB:-ithinksite}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
   ithinksite:
     build: .
     container_name: ithinksite
     restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
     env_file:
       - .env.local
     environment:
-      - NODE_ENV=production
-      - PORT=3000
+      NODE_ENV: production
+      PORT: "3000"
+      UPLOAD_DIR: /data/uploads
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - uploads_data:/data/uploads
+
+volumes:
+  postgres_data:
+  uploads_data:

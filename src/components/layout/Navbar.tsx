@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { Menu, X } from "lucide-react";
-import { SiteVariant, getVariantUrl } from "@/lib/site-variant";
+import { SiteVariant } from "@/lib/site-variant";
 
 interface NavItem {
   name: string;
@@ -51,6 +51,7 @@ export function Navbar({ variant }: NavbarProps) {
         { name: "Solutions", href: "/solutions" },
         { name: "Build", href: "/custom-software-development-zimbabwe" },
         { name: "Products", href: "/products" },
+        { name: "Blog", href: "/blog" },
         { name: "Case Studies", href: "/case-studies" },
         { name: "Contact", href: "/contact" },
         { name: "Client Portal", href: "/portal" },

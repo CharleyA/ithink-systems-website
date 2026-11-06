@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/portal"],
+      disallow: ["/portal", "/admin", "/api/admin"],
     },
     sitemap: "https://ithinksys.co.zw/sitemap.xml",
   };

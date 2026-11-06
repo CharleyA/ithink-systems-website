@@ -1,0 +1,112 @@
+[
+  {
+    "name": "School Books",
+    "slug": "school-books",
+    "tagline": "IPSAS school accounting",
+    "description": "School accounting for finance teams that need orderly records and reports. A demo is available to try the workflow.",
+    "audience": "Schools and school finance teams",
+    "status": "DEMO",
+    "demoUrl": "https://ipsas-demo.ithinksys.co.zw",
+    "image": "/images/products/school-books.jpg",
+    "sortOrder": 1
+  },
+  {
+    "name": "iThink Medicare",
+    "slug": "ithink-medicare",
+    "tagline": "Clinic and hospital management",
+    "description": "A comprehensive system for medical facilities, integrating electronic health records, pharmacy, and laboratory management.",
+    "audience": "Clinics and hospitals",
+    "status": "DEMO",
+    "demoUrl": "https://medicaredemo.ithinksys.co.zw",
+    "image": "/images/products/ithink-medicare.jpg",
+    "sortOrder": 2
+  },
+  {
+    "name": "ERPNext Implementation",
+    "slug": "erpnext-implementation",
+    "tagline": "Business operations on ERPNext",
+    "description": "Practical ERPNext implementation for finance, stock, and the work a business does every day.",
+    "audience": "Businesses that want one operational system",
+    "status": "LIVE",
+    "demoUrl": null,
+    "image": "/images/products/erpnext-implementation.jpg",
+    "sortOrder": 3
+  },
+  {
+    "name": "Digital Learning on Moodle",
+    "slug": "digital-learning-on-moodle",
+    "tagline": "Learning on Moodle",
+    "description": "Setup of Moodle for schools and training teams that want lessons, assignments, and learner records in one place. This offer is coming soon.",
+    "audience": "Schools and training teams",
+    "status": "COMING_SOON",
+    "demoUrl": null,
+    "image": "/images/products/digital-learning-moodle.jpg",
+    "sortOrder": 4
+  },
+  {
+    "name": "Booking System for lodges",
+    "slug": "booking-system-for-lodges",
+    "tagline": "Reservations for lodges",
+    "description": "A booking system so a lodge can take reservations and see which rooms or chalets are free.",
+    "audience": "Lodges and guest houses",
+    "status": "DEMO",
+    "demoUrl": "https://lodge-demo.ithinksys.co.zw",
+    "image": "/images/products/booking-system-lodges.jpg",
+    "sortOrder": 5
+  },
+  {
+    "name": "Inventory and Workflow Management",
+    "slug": "inventory-and-workflow-management",
+    "tagline": "Stock and everyday workflows",
+    "description": "Stock tracking and the handovers a team repeats each day. This offer is coming soon.",
+    "audience": "Stores and operations teams",
+    "status": "COMING_SOON",
+    "demoUrl": null,
+    "image": "/images/products/inventory-workflow.jpg",
+    "sortOrder": 6
+  },
+  {
+    "name": "Website Design",
+    "slug": "website-design",
+    "tagline": "Websites that stay clear on a phone",
+    "description": "Design and build of websites for schools, clinics, and businesses that need a straightforward public site.",
+    "audience": "Organisations that need a public website",
+    "status": "LIVE",
+    "demoUrl": null,
+    "image": "/images/products/website-design.jpg",
+    "sortOrder": 7
+  },
+  {
+    "name": "3D Home Walkthroughs",
+    "slug": "3d-home-walkthroughs",
+    "tagline": "Walk through a home on screen",
+    "description": "3D walkthroughs so a buyer or owner can move through a home before standing in it.",
+    "audience": "Property developers and homeowners",
+    "status": "LIVE",
+    "demoUrl": null,
+    "image": "/images/products/3d-home-walkthroughs.jpg",
+    "sortOrder": 8
+  },
+  {
+    "name": "Hosting and Support",
+    "slug": "hosting-and-support",
+    "tagline": "Hosting, and someone to call",
+    "description": "Hosting and follow-up support so a site or system keeps running after it goes live.",
+    "audience": "Teams that need a system looked after",
+    "status": "LIVE",
+    "demoUrl": null,
+    "image": "/images/products/hosting-support.jpg",
+    "sortOrder": 9
+  },
+  {
+    "name": "WhatsApp integration add-on",
+    "slug": "whatsapp-integration-add-on",
+    "tagline": "WhatsApp alongside your system",
+    "description": "An add-on that connects WhatsApp to a system you already use, so enquiries and updates can arrive there.",
+    "audience": "Teams whose customers already use WhatsApp",
+    "status": "LIVE",
+    "demoUrl": null,
+    "image": "/images/products/whatsapp-integration.jpg",
+    "sortOrder": 10
+  }
+]

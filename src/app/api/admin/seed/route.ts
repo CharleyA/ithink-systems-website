@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { tokensMatch } from "@/lib/cms/http";
 
 export async function POST(req: Request) {
-  const auth = req.headers.get("authorization") || "";
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+  const authHeader = req.headers.get("authorization") || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
 
-  if (!process.env.AUTH_SECRET || token !== process.env.AUTH_SECRET) {
+  if (!process.env.AUTH_SECRET || !token || !tokensMatch(token, process.env.AUTH_SECRET)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
