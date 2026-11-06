@@ -51,7 +51,7 @@ export default function ContactPage() {
                   },
                   { 
                     name: "Call Us", 
-                    value: "+263772950432", 
+                    value: "+263 78 434 2184", 
                     icon: Phone 
                   }
                 ].map((item) => (
