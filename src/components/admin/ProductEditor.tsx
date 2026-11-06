@@ -80,7 +80,7 @@ export function ProductEditor({ initial }: { initial?: ProductEditorValues }) {
             Sort order
             <input name="sortOrder" type="number" min={0} defaultValue={values.sortOrder} className="mt-1 w-full rounded-xl border px-3 py-2" />
           </label>
-          <p className="text-xs leading-5 text-[#5F5F5F]">Every public product offers Ask for a quote on WhatsApp. There is no price field.</p>
+          <p className="text-xs leading-5 text-[#5F5F5F]">Ask for a quote links to the contact page. There is no price field, and the phone number is not stored on the product.</p>
         </div>
         <div className="space-y-3 rounded-3xl border bg-white p-6">
           <p className="text-sm font-semibold">Image</p>

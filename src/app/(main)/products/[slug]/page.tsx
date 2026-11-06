@@ -78,7 +78,7 @@ export default async function ProductPage({ params }: Context) {
           <p className="text-sm font-semibold uppercase tracking-wider text-[#EC5A24]">{statusLabel(product.status)}</p>
           <h2 className="mt-3 text-2xl font-bold text-[#1A1A1A]">Talk to us / Ask for a quote</h2>
           <p className="mt-3 text-sm leading-6 text-[#5F5F5F]">
-            Tell us what you want to run. We reply on WhatsApp or by phone.
+            Tell us what you want to run and we will come back to you.
           </p>
           <div className="mt-6">
             <AskForQuote prominent />

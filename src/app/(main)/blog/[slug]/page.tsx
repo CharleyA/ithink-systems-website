@@ -129,7 +129,7 @@ export default async function BlogPostPage({ params }: Context) {
       <div className="mx-auto max-w-3xl px-6 pb-20 lg:px-8">
         <div className="rounded-3xl bg-[#FDEEE8] px-6 py-8 sm:px-8">
           <h2 className="text-2xl font-bold text-[#1A1A1A]">Talk to us / Ask for a quote</h2>
-          <p className="mt-2 text-[#5F5F5F]">Tell us what you want to run. We reply on WhatsApp or by phone.</p>
+          <p className="mt-2 text-[#5F5F5F]">Tell us what you want to run and we will come back to you.</p>
           <div className="mt-4">
             <AskForQuote prominent />
           </div>

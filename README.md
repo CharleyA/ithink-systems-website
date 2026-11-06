@@ -191,7 +191,7 @@ curl -fsS -H "Authorization: Bearer $CMS_API_TOKEN" \
 }
 ```
 
-`status` is `Live`, `Demo`, or `Coming soon`. There is no price field. Public pages always offer **Ask for a quote** on WhatsApp (`https://wa.me/263784342184`) and show `+263 78 434 2184`.
+`status` is `Live`, `Demo`, or `Coming soon`. There is no price field. Public pages offer **Ask for a quote**, which links to `/contact`. The phone number is shown only on the contact page, not on product cards or in the seed data.
 
 `GET`, `PATCH`, and `DELETE /api/admin/products/:id` behave like posts.
 
