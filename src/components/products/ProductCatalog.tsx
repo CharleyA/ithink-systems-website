@@ -2,13 +2,23 @@ import Link from "next/link";
 import { statusLabel } from "@/lib/cms/products";
 import type { Product } from "@prisma/client";
 import { AskForQuote } from "@/components/marketing/AskForQuote";
+import { SceneImage } from "@/components/media/SceneImage";
+import { altForScene } from "@/lib/scene-images";
 
 export function ProductCatalog({ products }: { products: Product[] }) {
   return (
     <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {products.map((product) => (
         <article key={product.slug} className="flex flex-col overflow-hidden rounded-3xl border bg-white">
-          <img src={product.image || "/images/products/placeholder.svg"} alt="" className="aspect-square w-full object-cover" />
+          {product.image && (
+            <div className="relative aspect-video">
+              <SceneImage
+                src={product.image}
+                alt={altForScene(product.image, `${product.name}`)}
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              />
+            </div>
+          )}
           <div className="flex flex-1 flex-col p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#EC5A24]">{statusLabel(product.status)}</p>
             <h2 className="mt-2 text-xl font-bold text-[#1A1A1A]">

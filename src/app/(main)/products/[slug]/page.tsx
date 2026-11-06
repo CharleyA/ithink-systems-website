@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AskForQuote } from "@/components/marketing/AskForQuote";
+import { SceneImage } from "@/components/media/SceneImage";
+import { altForScene } from "@/lib/scene-images";
 import { renderMarkdown } from "@/lib/cms/markdown";
 import { getProduct, statusLabel } from "@/lib/cms/products";
 import { absoluteUrl, siteName } from "@/lib/seo";
@@ -57,11 +59,16 @@ export default async function ProductPage({ params }: Context) {
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1A1A1A] sm:text-5xl">{product.name}</h1>
           <p className="mt-4 text-lg leading-8 text-[#5F5F5F]">{product.tagline}</p>
           <p className="mt-2 text-sm font-semibold text-[#1A1A1A]">For {product.audience}</p>
-          <img
-            src={product.image || "/images/products/placeholder.svg"}
-            alt=""
-            className="mt-8 aspect-square w-full rounded-3xl object-cover sm:aspect-[4/3]"
-          />
+          {product.image && (
+            <div className="relative mt-8 aspect-video overflow-hidden rounded-3xl">
+              <SceneImage
+                src={product.image}
+                alt={altForScene(product.image, product.name)}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                priority
+              />
+            </div>
+          )}
           <div
             className="prose prose-neutral mt-8 max-w-none prose-a:text-[#EC5A24]"
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}

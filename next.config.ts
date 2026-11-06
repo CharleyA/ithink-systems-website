@@ -5,10 +5,6 @@ const LOADER = path.resolve(__dirname, "src/visual-edits/component-tagger-loader
 
 const nextConfig: NextConfig = {
   images: {
-    // QUICK STABILITY FIX: disable Next's optimizer (removes /_next/image 400s)
-    unoptimized: true,
-
-    // Keep patterns anyway (useful if you later re-enable optimization)
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "ui-avatars.com" },

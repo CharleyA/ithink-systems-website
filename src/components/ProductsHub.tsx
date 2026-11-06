@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { AskForQuote } from "@/components/marketing/AskForQuote";
+import { SceneImage } from "@/components/media/SceneImage";
+import { altForScene } from "@/lib/scene-images";
 
 export type HubProduct = {
   id: string;
@@ -28,7 +30,15 @@ export function ProductsHub({ products }: { products: HubProduct[] }) {
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <article key={product.id} className="flex flex-col overflow-hidden rounded-3xl border bg-white">
-              <img src={product.image || "/images/products/placeholder.svg"} alt="" className="aspect-[4/3] w-full object-cover" />
+              {product.image && (
+                <div className="relative aspect-video">
+                  <SceneImage
+                    src={product.image}
+                    alt={altForScene(product.image, product.name)}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+              )}
               <div className="flex flex-1 flex-col p-6">
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#EC5A24]">{product.statusLabel}</p>
                 <h2 className="mt-2 text-2xl font-bold">{product.name}</h2>

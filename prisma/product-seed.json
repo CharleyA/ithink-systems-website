@@ -18,7 +18,7 @@
     "audience": "Clinics and hospitals",
     "status": "DEMO",
     "demoUrl": "https://medicaredemo.ithinksys.co.zw",
-    "image": "/images/products/medicare.jpg",
+    "image": "/images/products/ithink-medicare.jpg",
     "sortOrder": 2
   },
   {
@@ -29,7 +29,7 @@
     "audience": "Businesses that want one operational system",
     "status": "LIVE",
     "demoUrl": null,
-    "image": "/images/products/erpnext.jpg",
+    "image": "/images/products/erpnext-implementation.jpg",
     "sortOrder": 3
   },
   {
@@ -40,7 +40,7 @@
     "audience": "Schools and training teams",
     "status": "COMING_SOON",
     "demoUrl": null,
-    "image": "/images/products/digital-learning.jpg",
+    "image": "/images/products/digital-learning-moodle.jpg",
     "sortOrder": 4
   },
   {
@@ -51,7 +51,7 @@
     "audience": "Lodges and guest houses",
     "status": "DEMO",
     "demoUrl": "https://lodge-demo.ithinksys.co.zw",
-    "image": "/images/products/placeholder.svg",
+    "image": "/images/products/booking-system-lodges.jpg",
     "sortOrder": 5
   },
   {
@@ -62,7 +62,7 @@
     "audience": "Stores and operations teams",
     "status": "COMING_SOON",
     "demoUrl": null,
-    "image": "/images/products/placeholder.svg",
+    "image": "/images/products/inventory-workflow.jpg",
     "sortOrder": 6
   },
   {
@@ -84,7 +84,7 @@
     "audience": "Property developers and homeowners",
     "status": "LIVE",
     "demoUrl": null,
-    "image": "/images/products/3d-home.jpg",
+    "image": "/images/products/3d-home-walkthroughs.jpg",
     "sortOrder": 8
   },
   {
@@ -95,7 +95,7 @@
     "audience": "Teams that need a system looked after",
     "status": "LIVE",
     "demoUrl": null,
-    "image": "/images/products/placeholder.svg",
+    "image": "/images/products/hosting-support.jpg",
     "sortOrder": 9
   },
   {
@@ -106,7 +106,7 @@
     "audience": "Teams whose customers already use WhatsApp",
     "status": "LIVE",
     "demoUrl": null,
-    "image": "/images/products/placeholder.svg",
+    "image": "/images/products/whatsapp-integration.jpg",
     "sortOrder": 10
   }
 ]

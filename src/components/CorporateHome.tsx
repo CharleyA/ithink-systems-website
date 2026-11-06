@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type { Product } from "@prisma/client";
 import { AskForQuote } from "@/components/marketing/AskForQuote";
+import { SceneImage } from "@/components/media/SceneImage";
 import { statusLabel } from "@/lib/cms/products";
+import { altForScene } from "@/lib/scene-images";
 import { contactEmail, facebookUrl, officeAddress, whatsappChannelUrl } from "@/lib/site-contact";
 
 export type HomePost = {
@@ -14,11 +16,31 @@ export type HomePost = {
 };
 
 const sectors = [
-  { title: "Schools", text: "Accounting, learning, and the public site a school uses." },
-  { title: "Healthcare", text: "Clinic and hospital workflows, from the front desk to the pharmacy." },
-  { title: "Business", text: "ERPNext and the everyday systems a company actually runs." },
-  { title: "Councils", text: "Practical systems for local authority offices and service points." },
-  { title: "Hospitality", text: "Bookings and the tools a lodge uses to host guests." },
+  {
+    title: "Schools",
+    text: "Accounting, learning, and the public site a school uses.",
+    image: "/images/products/digital-learning-moodle.jpg",
+  },
+  {
+    title: "Healthcare",
+    text: "Clinic and hospital workflows, from the front desk to the pharmacy.",
+    image: "/images/products/ithink-medicare.jpg",
+  },
+  {
+    title: "Business",
+    text: "ERPNext and the everyday systems a company actually runs.",
+    image: "/images/products/erpnext-implementation.jpg",
+  },
+  {
+    title: "Councils",
+    text: "Practical systems for local authority offices and service points.",
+    image: "/images/sectors/councils.jpg",
+  },
+  {
+    title: "Hospitality",
+    text: "Bookings and the tools a lodge uses to host guests.",
+    image: "/images/products/booking-system-lodges.jpg",
+  },
 ];
 
 const featuredWork = [
@@ -37,39 +59,46 @@ const featuredWork = [
 export function CorporateHome({ latestPosts = [], products = [] }: { latestPosts?: HomePost[]; products?: Product[] }) {
   return (
     <div className="flex flex-col">
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#EC5A24]">iThink Systems · Bulawayo</p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1A1A1A] sm:text-6xl">Systems for any industry or setup</h1>
-            <p className="mt-6 text-lg leading-8 text-[#5F5F5F]">
-              We design, build, and look after software for schools, clinics, businesses, councils, and hospitality. Based in Bulawayo since 2021.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <AskForQuote prominent />
-              <Link
-                href="/products"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#1A1A1A] px-5 py-3 text-sm font-semibold text-[#1A1A1A]"
-              >
-                See our products
-              </Link>
-            </div>
+      <section className="relative isolate min-h-[32rem] overflow-hidden sm:min-h-[36rem]">
+        <SceneImage
+          src="/images/hero.jpg"
+          sizes="100vw"
+          priority
+          className="object-[center_30%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/92 via-[#1A1A1A]/72 to-[#EC5A24]/35" />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#FDEEE8]">iThink Systems · Bulawayo</p>
+          <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            Systems for any industry or setup
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/90">
+            We design, build, and look after software for schools, clinics, businesses, councils, and hospitality. Based in Bulawayo since 2021.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <AskForQuote prominent onDark />
+            <Link
+              href="/products"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white px-5 py-3 text-sm font-semibold text-white"
+            >
+              See our products
+            </Link>
           </div>
-          <img
-            src="/images/logo.png"
-            alt="iThink Systems"
-            className="mx-auto w-full max-w-md rounded-3xl bg-[#FDEEE8] object-contain p-10"
-          />
         </div>
       </section>
 
-      <section className="border-y bg-[#FDEEE8]">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-5 lg:px-8">
+      <section className="bg-[#FDEEE8]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-5 lg:px-8">
           {sectors.map((sector) => (
-            <div key={sector.title}>
-              <h2 className="text-lg font-bold text-[#1A1A1A]">{sector.title}</h2>
-              <p className="mt-2 text-sm leading-6 text-[#5F5F5F]">{sector.text}</p>
-            </div>
+            <article key={sector.title} className="overflow-hidden rounded-3xl bg-white">
+              <div className="relative aspect-video">
+                <SceneImage src={sector.image} sizes="(max-width: 640px) 100vw, 20vw" />
+              </div>
+              <div className="p-4">
+                <h2 className="text-lg font-bold text-[#1A1A1A]">{sector.title}</h2>
+                <p className="mt-2 text-sm leading-6 text-[#5F5F5F]">{sector.text}</p>
+              </div>
+            </article>
           ))}
         </div>
       </section>
@@ -88,7 +117,15 @@ export function CorporateHome({ latestPosts = [], products = [] }: { latestPosts
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <Link key={product.slug} href={`/products/${product.slug}`} className="overflow-hidden rounded-3xl border bg-white">
-                <img src={product.image || "/images/products/placeholder.svg"} alt="" className="aspect-[4/3] w-full object-cover" />
+                {product.image && (
+                  <div className="relative aspect-video">
+                    <SceneImage
+                      src={product.image}
+                      alt={altForScene(product.image, product.name)}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                )}
                 <div className="p-5">
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#EC5A24]">{statusLabel(product.status)}</p>
                   <h3 className="mt-2 text-lg font-bold text-[#1A1A1A]">{product.name}</h3>
@@ -129,7 +166,15 @@ export function CorporateHome({ latestPosts = [], products = [] }: { latestPosts
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {latestPosts.map((post) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="flex flex-col overflow-hidden rounded-3xl bg-white">
-                  {post.coverImage ? <img src={post.coverImage} alt="" className="h-40 w-full object-cover" /> : <div className="h-2 bg-[#EC5A24]" />}
+                  {post.coverImage?.startsWith("/") ? (
+                    <div className="relative h-40">
+                      <SceneImage src={post.coverImage} alt={post.title} sizes="(max-width: 1024px) 100vw, 33vw" />
+                    </div>
+                  ) : post.coverImage ? (
+                    <img src={post.coverImage} alt={post.title} className="h-40 w-full object-cover" />
+                  ) : (
+                    <div className="h-2 bg-[#EC5A24]" />
+                  )}
                   <div className="flex flex-1 flex-col p-5">
                     <p className="text-xs font-semibold uppercase tracking-wider text-[#EC5A24]">{post.category}</p>
                     <h3 className="mt-2 text-lg font-bold text-[#1A1A1A]">{post.title}</h3>
