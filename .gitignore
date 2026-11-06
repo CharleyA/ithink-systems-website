@@ -39,3 +39,6 @@ next-env.d.ts
 
 # Local secrets
 .env.local
+.env
+.env.*
+!.env.example
