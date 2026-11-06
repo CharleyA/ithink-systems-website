@@ -7,48 +7,38 @@ export type ProductEditorValues = {
   id?: string;
   name: string;
   slug: string;
-  summary: string;
+  tagline: string;
   description: string;
-  features: string;
-  images: string;
-  category: string;
-  price: string;
-  priceLabel: string;
-  ctaUrl: string;
+  audience: string;
+  status: "LIVE" | "DEMO" | "COMING_SOON";
   demoUrl: string;
-  featured: boolean;
+  image: string;
   sortOrder: number;
-  published: boolean;
 };
 
 const empty: ProductEditorValues = {
   name: "",
   slug: "",
-  summary: "",
+  tagline: "",
   description: "",
-  features: "",
-  images: "",
-  category: "Healthcare",
-  price: "",
-  priceLabel: "Contact for pricing",
-  ctaUrl: "/contact",
+  audience: "",
+  status: "LIVE",
   demoUrl: "",
-  featured: false,
+  image: "",
   sortOrder: 0,
-  published: false,
 };
 
 export function ProductEditor({ initial }: { initial?: ProductEditorValues }) {
   const values = initial ?? empty;
   const [state, action, pending] = useActionState(saveProductAction, {} as ActionState);
-  const [images, setImages] = useState(values.images);
+  const [image, setImage] = useState(values.image);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
 
   return (
     <form action={action} className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
       {values.id && <input type="hidden" name="id" value={values.id} />}
-      <input type="hidden" name="images" value={images} />
+      <input type="hidden" name="image" value={image} />
       <div className="space-y-4 rounded-3xl border bg-white p-6">
         {state.error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p>}
         <label className="block text-sm font-semibold">
@@ -60,62 +50,41 @@ export function ProductEditor({ initial }: { initial?: ProductEditorValues }) {
           <input name="slug" defaultValue={values.slug} className="mt-1 w-full rounded-xl border px-3 py-2" />
         </label>
         <label className="block text-sm font-semibold">
-          Summary
-          <textarea name="summary" required defaultValue={values.summary} rows={3} className="mt-1 w-full rounded-xl border px-3 py-2" />
+          Tagline
+          <input name="tagline" required defaultValue={values.tagline} className="mt-1 w-full rounded-xl border px-3 py-2" />
         </label>
         <label className="block text-sm font-semibold">
           Description (Markdown)
-          <textarea name="description" required defaultValue={values.description} rows={10} className="mt-1 w-full rounded-xl border px-3 py-2" />
+          <textarea name="description" required defaultValue={values.description} rows={8} className="mt-1 w-full rounded-xl border px-3 py-2" />
         </label>
         <label className="block text-sm font-semibold">
-          Features (one per line)
-          <textarea name="features" defaultValue={values.features} rows={5} className="mt-1 w-full rounded-xl border px-3 py-2" />
+          Audience
+          <input name="audience" required defaultValue={values.audience} className="mt-1 w-full rounded-xl border px-3 py-2" />
         </label>
       </div>
       <div className="space-y-4">
         <div className="space-y-4 rounded-3xl border bg-white p-6">
           <label className="block text-sm font-semibold">
-            Category
-            <input name="category" required defaultValue={values.category} className="mt-1 w-full rounded-xl border px-3 py-2" />
+            Status
+            <select name="status" defaultValue={values.status} className="mt-1 w-full rounded-xl border px-3 py-2">
+              <option value="LIVE">Live</option>
+              <option value="DEMO">Demo</option>
+              <option value="COMING_SOON">Coming soon</option>
+            </select>
           </label>
           <label className="block text-sm font-semibold">
-            Price in USD
-            <input name="price" defaultValue={values.price} placeholder="Leave blank to use the label" className="mt-1 w-full rounded-xl border px-3 py-2" />
-          </label>
-          <label className="block text-sm font-semibold">
-            Price label
-            <input name="priceLabel" defaultValue={values.priceLabel} className="mt-1 w-full rounded-xl border px-3 py-2" />
-          </label>
-          <label className="block text-sm font-semibold">
-            CTA link
-            <input name="ctaUrl" required defaultValue={values.ctaUrl} className="mt-1 w-full rounded-xl border px-3 py-2" />
-          </label>
-          <label className="block text-sm font-semibold">
-            Demo link
+            Demo URL
             <input name="demoUrl" defaultValue={values.demoUrl} className="mt-1 w-full rounded-xl border px-3 py-2" />
           </label>
           <label className="block text-sm font-semibold">
             Sort order
             <input name="sortOrder" type="number" min={0} defaultValue={values.sortOrder} className="mt-1 w-full rounded-xl border px-3 py-2" />
           </label>
-          <label className="flex items-center gap-2 text-sm font-semibold">
-            <input type="checkbox" name="featured" defaultChecked={values.featured} />
-            Featured on the home page
-          </label>
-          <label className="flex items-center gap-2 text-sm font-semibold">
-            <input type="checkbox" name="published" defaultChecked={values.published} />
-            Published
-          </label>
+          <p className="text-xs leading-5 text-[#5F5F5F]">Every public product offers Ask for a quote on WhatsApp. There is no price field.</p>
         </div>
         <div className="space-y-3 rounded-3xl border bg-white p-6">
-          <p className="text-sm font-semibold">Images</p>
-          <textarea
-            value={images}
-            onChange={(event) => setImages(event.target.value)}
-            rows={4}
-            className="w-full rounded-xl border px-3 py-2 text-sm"
-            placeholder="One /media or https URL per line"
-          />
+          <p className="text-sm font-semibold">Image</p>
+          {image && <img src={image} alt="" className="h-36 w-full rounded-xl object-cover" />}
           {uploadError && <p className="text-sm text-red-700">{uploadError}</p>}
           <input
             type="file"
@@ -131,16 +100,14 @@ export function ProductEditor({ initial }: { initial?: ProductEditorValues }) {
               data.set("file", file);
               const result = await uploadAdminImage({}, data);
               setUploading(false);
-              if (!result.url) {
-                setUploadError(result.error || "Upload failed");
-                return;
-              }
-              setImages((current) => {
-                const lines = current.split("\n").map((line) => line.trim()).filter(Boolean);
-                return lines.includes(result.url!) ? current : [...lines, result.url!].join("\n");
-              });
+              if (result.url) setImage(result.url);
+              else setUploadError(result.error || "Upload failed");
             }}
           />
+          <label className="block text-sm font-semibold">
+            Or paste a path or URL
+            <input value={image} onChange={(event) => setImage(event.target.value)} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" />
+          </label>
         </div>
         <button type="submit" disabled={pending} className="w-full rounded-xl bg-[#EC5A24] px-4 py-3 font-semibold text-white disabled:opacity-60">
           {pending ? "Saving..." : "Save product"}

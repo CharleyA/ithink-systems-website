@@ -23,11 +23,9 @@ export default async function EditProductPage({
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Edit product</h1>
         <div className="flex items-center gap-4">
-          {product.published && (
-            <Link href={`/products/${product.slug}`} className="text-sm font-semibold text-[#EC5A24]">
-              View
-            </Link>
-          )}
+          <Link href={`/products/${product.slug}`} className="text-sm font-semibold text-[#EC5A24]">
+            View
+          </Link>
           <form action={deleteProductAction}>
             <input type="hidden" name="id" value={product.id} />
             <button type="submit" className="text-sm font-semibold text-red-700">
@@ -43,18 +41,13 @@ export default async function EditProductPage({
           id: product.id,
           name: product.name,
           slug: product.slug,
-          summary: product.summary,
+          tagline: product.tagline,
           description: product.description,
-          features: product.features.join("\n"),
-          images: product.images.join("\n"),
-          category: product.category,
-          price: product.priceCents == null ? "" : (product.priceCents / 100).toFixed(2),
-          priceLabel: product.priceLabel,
-          ctaUrl: product.ctaUrl,
+          audience: product.audience,
+          status: product.status,
           demoUrl: product.demoUrl ?? "",
-          featured: product.featured,
+          image: product.image ?? "",
           sortOrder: product.sortOrder,
-          published: product.published,
         }}
       />
     </div>

@@ -26,8 +26,7 @@ export function isSafeLink(value: string) {
 }
 
 export function isSafeImageRef(value: string) {
-  if (/^\/media\/[A-Za-z0-9_-]+$/.test(value)) return true;
-  return isSafeLink(value) && !value.startsWith("/");
+  return isSafeLink(value);
 }
 
 const stringList = z
@@ -50,6 +49,7 @@ export const postWriteSchema = z.object({
   excerpt: z.string().trim().min(1).max(400),
   body: z.string().trim().min(1).max(100_000),
   coverImage: z.string().trim().max(500).optional().nullable(),
+  ogImage: z.string().trim().max(500).optional().nullable(),
   category: z.string().trim().min(1).max(80),
   tags: stringList,
   author: z.string().trim().min(1).max(120).optional().nullable(),
@@ -64,18 +64,13 @@ export const postPatchSchema = postWriteSchema.partial();
 export const productWriteSchema = z.object({
   name: z.string().trim().min(2).max(160),
   slug: z.string().trim().max(120).optional().nullable(),
-  summary: z.string().trim().min(1).max(400),
+  tagline: z.string().trim().min(1).max(180),
   description: z.string().trim().min(1).max(20_000),
-  features: stringList,
-  images: stringList,
-  category: z.string().trim().min(1).max(80),
-  priceCents: z.number().int().min(0).max(100_000_000).optional().nullable(),
-  priceLabel: z.string().trim().min(1).max(80).optional().nullable(),
-  ctaUrl: z.string().trim().min(1).max(500),
+  audience: z.string().trim().min(1).max(180),
+  status: z.string().trim().max(40).optional().nullable(),
   demoUrl: z.string().trim().max(500).optional().nullable(),
-  featured: z.boolean().optional(),
+  image: z.string().trim().max(500).optional().nullable(),
   sortOrder: z.number().int().min(0).max(10_000).optional(),
-  published: z.boolean().optional(),
 });
 
 export const productPatchSchema = productWriteSchema.partial();

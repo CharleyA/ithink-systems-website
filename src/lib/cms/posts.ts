@@ -10,6 +10,7 @@ export type PostWrite = {
   excerpt: string;
   body: string;
   coverImage?: string | null;
+  ogImage?: string | null;
   category: string;
   tags?: string[];
   author?: string | null;
@@ -35,6 +36,7 @@ export function serializePost(post: Post) {
     excerpt: post.excerpt,
     body: post.body,
     coverImage: post.coverImage,
+    ogImage: post.ogImage,
     category: post.category,
     tags: post.tags,
     author: post.author,
@@ -123,6 +125,15 @@ export async function latestPublicPosts(take = 3) {
   });
 }
 
+export async function relatedPublicPosts(post: { id: string; category: string }, take = 3) {
+  return prisma.post.findMany({
+    where: { ...publicPostWhere(), category: post.category, id: { not: post.id } },
+    select: publicSelect,
+    orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+    take,
+  });
+}
+
 export async function listSitemapPosts() {
   return prisma.post.findMany({
     where: publicPostWhere(),
@@ -163,6 +174,7 @@ export async function createPost(input: PostWrite) {
         excerpt: input.excerpt.trim(),
         body: input.body.trim(),
         coverImage: cleanCover(emptyToNull(input.coverImage)),
+        ogImage: cleanCover(emptyToNull(input.ogImage)),
         category: input.category.trim(),
         tags: assertList(input.tags ?? [], "Tags", 12, 40),
         author: emptyToNull(input.author) ?? "iThink Systems",
@@ -195,6 +207,7 @@ export async function updatePost(idOrSlug: string, input: Partial<PostWrite>) {
     if (input.excerpt != null) data.excerpt = input.excerpt.trim();
     if (input.body != null) data.body = input.body.trim();
     if (input.coverImage !== undefined) data.coverImage = cleanCover(emptyToNull(input.coverImage));
+    if (input.ogImage !== undefined) data.ogImage = cleanCover(emptyToNull(input.ogImage));
     if (input.category != null) data.category = input.category.trim();
     if (input.tags !== undefined) data.tags = assertList(input.tags, "Tags", 12, 40);
     if (input.author !== undefined) data.author = emptyToNull(input.author) ?? "iThink Systems";

@@ -2,6 +2,7 @@ import { ZodError } from "zod";
 import { json, readJson, requireApiToken, validationError } from "@/lib/cms/http";
 import { createPost, listAdminPosts } from "@/lib/cms/posts";
 import { revalidateContent } from "@/lib/cms/revalidate";
+import { pullInlineImages } from "@/lib/cms/inline-image";
 import { postWriteSchema } from "@/lib/cms/schemas";
 
 export const dynamic = "force-dynamic";
@@ -31,11 +32,14 @@ export async function POST(req: Request) {
   const denied = requireApiToken(req);
   if (denied) return denied;
 
-  const body = await readJson(req);
+  const body = await readJson(req, 8_000_000);
   if (body.error) return body.error;
 
   try {
-    const input = postWriteSchema.parse(body.data);
+    const raw = (body.data ?? {}) as Record<string, unknown>;
+    const images = await pullInlineImages(raw);
+    if (!images.ok) return json({ error: images.error }, 400);
+    const input = postWriteSchema.parse(raw);
     const result = await createPost({
       ...input,
       tags: input.tags ?? [],

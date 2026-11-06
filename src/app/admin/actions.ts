@@ -21,11 +21,6 @@ function field(formData: FormData, name: string) {
   return String(formData.get(name) ?? "");
 }
 
-function checked(formData: FormData, name: string) {
-  const value = formData.get(name);
-  return value === "on" || value === "true" || value === "1";
-}
-
 function issue(error: unknown) {
   if (error instanceof ZodError) return error.issues[0]?.message || "Invalid input";
   return "Invalid input";
@@ -54,6 +49,7 @@ export async function savePostAction(_prev: ActionState, formData: FormData): Pr
     excerpt: field(formData, "excerpt"),
     body: field(formData, "body"),
     coverImage: field(formData, "coverImage"),
+    ogImage: field(formData, "ogImage"),
     category: field(formData, "category"),
     tags: field(formData, "tags"),
     author: field(formData, "author"),
@@ -86,16 +82,6 @@ export async function deletePostAction(formData: FormData) {
 export async function saveProductAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
   await requireAdmin();
   const id = field(formData, "id").trim();
-  const priceRaw = field(formData, "price").trim();
-  let priceCents: number | null = null;
-  if (priceRaw) {
-    const amount = Number(priceRaw);
-    if (!Number.isFinite(amount) || amount < 0) {
-      return { error: "Price must be a number of US dollars, or left blank for contact pricing" };
-    }
-    priceCents = Math.round(amount * 100);
-  }
-
   const sortRaw = field(formData, "sortOrder").trim();
   const sortOrder = sortRaw ? Number(sortRaw) : 0;
   if (!Number.isInteger(sortOrder) || sortOrder < 0) {
@@ -105,29 +91,18 @@ export async function saveProductAction(_prev: ActionState, formData: FormData):
   const payload = {
     name: field(formData, "name"),
     slug: field(formData, "slug"),
-    summary: field(formData, "summary"),
+    tagline: field(formData, "tagline"),
     description: field(formData, "description"),
-    features: field(formData, "features"),
-    images: field(formData, "images"),
-    category: field(formData, "category"),
-    priceCents,
-    priceLabel: field(formData, "priceLabel") || "Contact for pricing",
-    ctaUrl: field(formData, "ctaUrl") || "/contact",
+    audience: field(formData, "audience"),
+    status: field(formData, "status") || "Live",
     demoUrl: field(formData, "demoUrl"),
-    featured: checked(formData, "featured"),
+    image: field(formData, "image"),
     sortOrder,
-    published: checked(formData, "published"),
   };
 
   const parsed = productWriteSchema.safeParse(payload);
   if (!parsed.success) return { error: issue(parsed.error) };
-
-  const input = {
-    ...parsed.data,
-    features: parsed.data.features ?? [],
-    images: parsed.data.images ?? [],
-  };
-  const result = id ? await updateProduct(id, input) : await createProduct(input);
+  const result = id ? await updateProduct(id, parsed.data) : await createProduct(parsed.data);
   if (!result.ok) return { error: result.error };
   revalidateContent();
   redirect(`/admin/products/${result.product.id}?saved=1`);

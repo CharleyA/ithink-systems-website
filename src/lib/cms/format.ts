@@ -36,11 +36,3 @@ export function fromHarareInput(value: string | null | undefined): Date | null {
   return date;
 }
 
-export function formatPrice(product: { priceCents: number | null; priceLabel: string }) {
-  if (product.priceCents == null) return product.priceLabel || "Contact for pricing";
-  const amount = (product.priceCents / 100).toLocaleString("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-  return `USD ${amount}`;
-}

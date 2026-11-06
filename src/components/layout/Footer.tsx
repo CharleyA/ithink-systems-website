@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Facebook, Github, Linkedin } from "lucide-react";
+import { facebookUrl } from "@/lib/site-contact";
 
 const navigation = {
   solutions: [
@@ -46,7 +47,7 @@ export function Footer() {
             </p>
             <div className="flex gap-x-6">
               <Link
-                href="https://www.facebook.com/profile.php?id=100084773075035"
+                href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary"

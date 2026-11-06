@@ -105,7 +105,7 @@ Authorization: Bearer $CMS_API_TOKEN
 Content-Type: application/json
 ```
 
-Unknown or missing tokens receive `401`. The API allows 120 requests per minute. Bodies over 1 MB are rejected. Image uploads are multipart, field name `file`, maximum 5 MB, JPEG / PNG / GIF / WebP only (SVG is rejected).
+Unknown or missing tokens receive `401`. The API allows 120 requests per minute. JSON bodies over 1 MB are rejected, except post create/update and image upload, which allow up to 8 MB so a cover image can travel with the post. Images are JPEG, PNG, GIF, or WebP, maximum 5 MB. SVG is rejected.
 
 Dates are ISO-8601. A `datetime-local` value without a timezone is interpreted as Africa/Harare (UTC+2). A published post whose `publishedAt` is in the future stays off the site, the sitemap, and the RSS feed until that time.
 
@@ -122,6 +122,7 @@ Dates are ISO-8601. A `datetime-local` value without a timezone is interpreted a
   "excerpt": "A short brief for teams moving off paper registers.",
   "body": "## Start with the register\n\nWrite the first visit down once.",
   "coverImage": "/media/your-media-id",
+  "ogImage": "/media/your-og-id",
   "category": "Healthcare",
   "tags": ["ehr", "clinics"],
   "author": "iThink Systems",
@@ -132,7 +133,37 @@ Dates are ISO-8601. A `datetime-local` value without a timezone is interpreted a
 }
 ```
 
-`slug` is optional; it is generated from the title. `status` is `draft` or `published`. Omit `publishedAt` on a published post to publish immediately.
+`slug` is optional; it is generated from the title. `status` is `draft` or `published`. Omit `publishedAt` on a published post to publish immediately. `ogImage` is optional and falls back to the cover image. To upload the cover in the same request, send `coverImageBase64` and optional `coverImageFilename` instead of `coverImage`. `ogImageBase64` and `ogImageFilename` work the same way for the Open Graph image.
+
+Publish today’s note, including a cover, from the shell:
+
+```bash
+curl -fsS -H "Authorization: Bearer $CMS_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @- http://127.0.0.1:3000/api/admin/posts <<JSON
+{
+  "title": "What to check before a school goes digital",
+  "excerpt": "Three practical checks for a school finance or learning team.",
+  "body": "## Start small\\n\\nPick one register and write it down once.",
+  "category": "Education",
+  "tags": ["schools"],
+  "author": "iThink Systems",
+  "status": "published",
+  "coverImageFilename": "cover.jpg",
+  "coverImageBase64": "$(base64 -w0 cover.jpg)"
+}
+JSON
+```
+
+The `$(base64 ...)` above must be expanded by the shell. This form does that:
+
+```bash
+COVER=$(base64 -w0 cover.jpg)
+curl -fsS -H "Authorization: Bearer $CMS_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"title\":\"What to check before a school goes digital\",\"excerpt\":\"Three practical checks.\",\"body\":\"## Start small\",\"category\":\"Education\",\"status\":\"published\",\"coverImageFilename\":\"cover.jpg\",\"coverImageBase64\":\"$COVER\"}" \
+  http://127.0.0.1:3000/api/admin/posts
+```
 
 `GET /api/admin/posts/:id` accepts the id or the slug.
 
@@ -148,40 +179,54 @@ Dates are ISO-8601. A `datetime-local` value without a timezone is interpreted a
 
 ```json
 {
-  "name": "Medisure_OS",
-  "slug": "medisure-os",
-  "summary": "Operating system for medical facilities.",
-  "description": "Longer markdown description.",
-  "features": ["EHR", "Pharmacy", "Laboratory"],
-  "images": ["/media/your-media-id"],
-  "category": "Healthcare",
-  "priceCents": null,
-  "priceLabel": "Contact for pricing",
-  "ctaUrl": "/contact?product=medisure-os",
-  "demoUrl": "https://demo.ithinksys.co.zw/medisure",
-  "featured": true,
-  "sortOrder": 1,
-  "published": true
+  "name": "School Books",
+  "slug": "school-books",
+  "tagline": "IPSAS school accounting",
+  "description": "School accounting for finance teams.",
+  "audience": "Schools and school finance teams",
+  "status": "Demo",
+  "demoUrl": "https://ipsas-demo.ithinksys.co.zw",
+  "image": "/images/products/school-books.jpg",
+  "sortOrder": 1
 }
 ```
 
-Leave `priceCents` null to show `priceLabel`. A number is US cents (`150000` is USD 1,500.00).
+`status` is `Live`, `Demo`, or `Coming soon`. There is no price field. Public pages always offer **Ask for a quote** on WhatsApp (`https://wa.me/263784342184`) and show `+263 78 434 2184`.
 
 `GET`, `PATCH`, and `DELETE /api/admin/products/:id` behave like posts.
 
 ### Images
 
-`POST /api/admin/media` as `multipart/form-data` with a `file` field.
+`POST /api/admin/media` accepts either multipart or base64 JSON. The file is stored in `MediaAsset` and copied to `UPLOAD_DIR`.
+
+Multipart:
+
+```bash
+curl -fsS -H "Authorization: Bearer $CMS_API_TOKEN" \
+  -F file=@cover.jpg \
+  http://127.0.0.1:3000/api/admin/media
+```
+
+Base64:
+
+```bash
+curl -fsS -H "Authorization: Bearer $CMS_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"filename\":\"cover.jpg\",\"data\":\"$(base64 -w0 cover.jpg)\"}" \
+  http://127.0.0.1:3000/api/admin/media
+```
 
 ```json
 { "media": { "id": "…", "url": "/media/…", "mimeType": "image/jpeg", "size": 12345, "filename": "cover.jpg" } }
 ```
 
-Use `url` as `coverImage` or in `images`. The file is stored in the `MediaAsset` table and copied to `UPLOAD_DIR`.
+Use `url` as `coverImage`, `ogImage`, or a product `image`.
 
 ## Docker deploy
 
 The image is `node:22-bookworm-slim`. On start it runs `prisma migrate deploy`, seeds catalogue products (without overwriting edits), and then `npm start`.
+
+Migration `20261106103000_marketing_catalogue` runs once. It adds `Post.ogImage`, replaces the `Product` table, and inserts the ten marketing products (no prices). Later starts only insert a product if its slug is missing.
 
 ```bash
 # .env holds POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB for Compose.

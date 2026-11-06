@@ -3,8 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatHarare } from "@/lib/cms/format";
 import { renderMarkdown } from "@/lib/cms/markdown";
-import { getPublicPost } from "@/lib/cms/posts";
+import { getPublicPost, relatedPublicPosts } from "@/lib/cms/posts";
 import { absoluteUrl, siteName } from "@/lib/seo";
+import { AskForQuote } from "@/components/marketing/AskForQuote";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Context): Promise<Metadata> {
   if (!post) return { title: "Article" };
   const title = post.seoTitle || post.title;
   const description = post.seoDescription || post.excerpt;
-  const image = coverUrl(post.coverImage);
+  const image = coverUrl(post.ogImage || post.coverImage);
   return {
     title,
     description,
@@ -50,7 +51,7 @@ export default async function BlogPostPage({ params }: Context) {
   const { slug } = await params;
   const post = await getPublicPost(slug);
   if (!post) notFound();
-
+  const related = await relatedPublicPosts(post);
   const html = renderMarkdown(post.body);
   const image = coverUrl(post.coverImage);
   const jsonLd = {
@@ -107,15 +108,31 @@ export default async function BlogPostPage({ params }: Context) {
         className="prose prose-neutral mx-auto max-w-3xl px-6 py-12 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-[#EC5A24] prose-img:rounded-2xl lg:px-8"
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      {related.length > 0 && (
+        <div className="mx-auto max-w-3xl px-6 pb-4 lg:px-8">
+          <h2 className="text-2xl font-bold text-[#1A1A1A]">Related posts</h2>
+          <ul className="mt-4 space-y-4">
+            {related.map((item) => (
+              <li key={item.id}>
+                <Link href={`/blog/${item.slug}`} className="font-semibold text-[#1A1A1A] hover:text-[#EC5A24]">
+                  {item.title}
+                </Link>
+                <p className="text-sm text-[#5F5F5F]">
+                  {item.excerpt}
+                  {item.publishedAt ? ` · ${formatHarare(item.publishedAt)}` : ""}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="mx-auto max-w-3xl px-6 pb-20 lg:px-8">
-        <div className="rounded-3xl bg-[#FDEEE8] px-8 py-8">
-          <h2 className="text-2xl font-bold text-[#1A1A1A]">Talk to iThink Systems</h2>
-          <p className="mt-2 text-[#5F5F5F]">
-            We design healthcare, education, and business systems from Bulawayo. Tell us what you are trying to run.
-          </p>
-          <Link href="/contact" className="mt-4 inline-flex font-semibold text-[#EC5A24]">
-            Contact the team →
-          </Link>
+        <div className="rounded-3xl bg-[#FDEEE8] px-6 py-8 sm:px-8">
+          <h2 className="text-2xl font-bold text-[#1A1A1A]">Talk to us / Ask for a quote</h2>
+          <p className="mt-2 text-[#5F5F5F]">Tell us what you want to run. We reply on WhatsApp or by phone.</p>
+          <div className="mt-4">
+            <AskForQuote prominent />
+          </div>
         </div>
       </div>
     </article>

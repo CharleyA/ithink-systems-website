@@ -47,6 +47,7 @@ export default async function EditPostPage({
           excerpt: post.excerpt,
           body: post.body,
           coverImage: post.coverImage ?? "",
+          ogImage: post.ogImage ?? "",
           category: post.category,
           tags: post.tags.join(", "),
           author: post.author,

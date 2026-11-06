@@ -2,6 +2,7 @@ import { ZodError } from "zod";
 import { json, readJson, requireApiToken, validationError } from "@/lib/cms/http";
 import { deletePost, getAdminPost, updatePost } from "@/lib/cms/posts";
 import { revalidateContent } from "@/lib/cms/revalidate";
+import { pullInlineImages } from "@/lib/cms/inline-image";
 import { postPatchSchema } from "@/lib/cms/schemas";
 
 export const dynamic = "force-dynamic";
@@ -20,11 +21,14 @@ export async function GET(req: Request, context: Context) {
 export async function PATCH(req: Request, context: Context) {
   const denied = requireApiToken(req);
   if (denied) return denied;
-  const body = await readJson(req);
+  const body = await readJson(req, 8_000_000);
   if (body.error) return body.error;
 
   try {
-    const input = postPatchSchema.parse(body.data);
+    const raw = (body.data ?? {}) as Record<string, unknown>;
+    const images = await pullInlineImages(raw);
+    if (!images.ok) return json({ error: images.error }, 400);
+    const input = postPatchSchema.parse(raw);
     const { id } = await context.params;
     const result = await updatePost(id, input);
     if (!result.ok) return json({ error: result.error }, result.status);

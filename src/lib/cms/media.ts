@@ -29,12 +29,16 @@ function safeName(name: string) {
   return base.slice(0, 120) || "image";
 }
 
-export async function saveImageUpload(file: File) {
-  if (file.size <= 0 || file.size > MAX_BYTES) {
+export function decodeBase64Image(input: string) {
+  const stripped = input.replace(/^data:[^;]+;base64,/i, "").replace(/\s/g, "");
+  return Buffer.from(stripped, "base64");
+}
+
+export async function saveImageBytes(bytes: Buffer, filename: string) {
+  if (bytes.length <= 0 || bytes.length > MAX_BYTES) {
     return { ok: false as const, error: "Image must be between 1 byte and 5 MB" };
   }
 
-  const bytes = Buffer.from(await file.arrayBuffer());
   const mimeType = detectImage(bytes);
   if (!mimeType) {
     return { ok: false as const, error: "Only JPEG, PNG, GIF, and WebP images are accepted" };
@@ -42,7 +46,7 @@ export async function saveImageUpload(file: File) {
 
   const asset = await prisma.mediaAsset.create({
     data: {
-      filename: safeName(file.name || "image"),
+      filename: safeName(filename || "image"),
       mimeType,
       size: bytes.length,
       bytes,
@@ -67,6 +71,10 @@ export async function saveImageUpload(file: File) {
       filename: asset.filename,
     },
   };
+}
+
+export async function saveImageUpload(file: File) {
+  return saveImageBytes(Buffer.from(await file.arrayBuffer()), file.name || "image");
 }
 
 export async function readMedia(id: string) {

@@ -17,6 +17,12 @@ enum PostStatus {
   PUBLISHED
 }
 
+enum ProductStatus {
+  LIVE
+  DEMO
+  COMING_SOON
+}
+
 model PortalUser {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -44,6 +50,7 @@ model Post {
   publishedAt    DateTime?
   seoTitle       String?
   seoDescription String?
+  ogImage        String?
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
 
@@ -52,25 +59,20 @@ model Post {
 }
 
 model Product {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
   name        String
-  slug        String   @unique
-  summary     String
+  slug        String        @unique
+  tagline     String
   description String
-  features    String[]
-  images      String[]
-  category    String
-  priceCents  Int?
-  priceLabel  String   @default("Contact for pricing")
-  ctaUrl      String
+  audience    String
+  status      ProductStatus @default(LIVE)
   demoUrl     String?
-  featured    Boolean  @default(false)
-  sortOrder   Int      @default(0)
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  image       String?
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
-  @@index([published, featured, sortOrder])
+  @@index([sortOrder])
 }
 
 /// Uploaded images. Bytes live in Postgres so a container rebuild cannot drop them.

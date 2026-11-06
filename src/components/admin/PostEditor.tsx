@@ -10,6 +10,7 @@ export type PostEditorValues = {
   excerpt: string;
   body: string;
   coverImage: string;
+  ogImage: string;
   category: string;
   tags: string;
   author: string;
@@ -25,6 +26,7 @@ const empty: PostEditorValues = {
   excerpt: "",
   body: "",
   coverImage: "",
+  ogImage: "",
   category: "Education",
   tags: "",
   author: "iThink Systems",
@@ -39,6 +41,7 @@ export function PostEditor({ initial }: { initial?: PostEditorValues }) {
   const [state, action, pending] = useActionState(savePostAction, {} as ActionState);
   const [body, setBody] = useState(values.body);
   const [cover, setCover] = useState(values.coverImage);
+  const [ogImage, setOgImage] = useState(values.ogImage);
   const [preview, setPreview] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -53,6 +56,7 @@ export function PostEditor({ initial }: { initial?: PostEditorValues }) {
     <form action={action} className="grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
       {values.id && <input type="hidden" name="id" value={values.id} />}
       <input type="hidden" name="coverImage" value={cover} />
+      <input type="hidden" name="ogImage" value={ogImage} />
       <div className="space-y-4 rounded-3xl border bg-white p-6">
         {state.error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{state.error}</p>}
         <label className="block text-sm font-semibold">
@@ -159,6 +163,15 @@ export function PostEditor({ initial }: { initial?: PostEditorValues }) {
             <input
               value={cover}
               onChange={(event) => setCover(event.target.value)}
+              className="mt-1 w-full rounded-xl border px-3 py-2 text-sm"
+            />
+          </label>
+          <label className="block text-sm font-semibold">
+            Open Graph image
+            <input
+              value={ogImage}
+              onChange={(event) => setOgImage(event.target.value)}
+              placeholder="Defaults to the cover when empty"
               className="mt-1 w-full rounded-xl border px-3 py-2 text-sm"
             />
           </label>

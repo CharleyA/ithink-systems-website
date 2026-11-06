@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { statusLabel } from "@/lib/cms/products";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({
-    orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { name: "asc" }],
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
   });
 
   return (
@@ -16,13 +17,13 @@ export default async function AdminProductsPage() {
           New product
         </Link>
       </div>
-      <div className="mt-6 overflow-hidden rounded-3xl border bg-white">
+      <div className="mt-6 overflow-x-auto rounded-3xl border bg-white">
         <table className="w-full text-left text-sm">
           <thead className="bg-[#FDEEE8]">
             <tr>
               <th className="px-4 py-3">Name</th>
-              <th className="px-4 py-3">Category</th>
-              <th className="px-4 py-3">Visibility</th>
+              <th className="px-4 py-3">Audience</th>
+              <th className="px-4 py-3">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -33,11 +34,8 @@ export default async function AdminProductsPage() {
                     {product.name}
                   </Link>
                 </td>
-                <td className="px-4 py-3">{product.category}</td>
-                <td className="px-4 py-3 text-[#5F5F5F]">
-                  {product.published ? "Published" : "Hidden"}
-                  {product.featured ? " · Featured" : ""}
-                </td>
+                <td className="px-4 py-3">{product.audience}</td>
+                <td className="px-4 py-3 text-[#5F5F5F]">{statusLabel(product.status)}</td>
               </tr>
             ))}
           </tbody>

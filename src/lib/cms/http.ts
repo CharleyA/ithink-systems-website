@@ -34,9 +34,9 @@ export function requireApiToken(req: Request) {
   return null;
 }
 
-export async function readJson(req: Request) {
+export async function readJson(req: Request, maxBytes = 1_000_000) {
   const length = Number(req.headers.get("content-length") || 0);
-  if (length > 1_000_000) {
+  if (length > maxBytes) {
     return { error: json({ error: "Payload too large" }, 413) };
   }
   try {
