@@ -63,6 +63,7 @@ export default function CaseStudyDetailContent({ caseStudy }: CaseStudyDetailCon
           src={caseStudy.image}
           alt={caseStudy.title}
           fill
+          unoptimized
           className="object-cover"
           priority
         />

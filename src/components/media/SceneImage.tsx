@@ -14,6 +14,7 @@ export function SceneImage({
   priority?: boolean;
   className?: string;
 }) {
+  const remote = src.startsWith("http://") || src.startsWith("https://");
   return (
     <Image
       src={src}
@@ -21,6 +22,7 @@ export function SceneImage({
       fill
       sizes={sizes}
       priority={priority}
+      unoptimized={remote}
       className={`object-cover ${className}`}
     />
   );

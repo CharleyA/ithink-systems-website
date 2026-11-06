@@ -186,7 +186,7 @@ export default function SolutionsPage() {
               </div>
               <div className="flex-1 relative aspect-[16/9] lg:aspect-auto">
                 <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-xl">
-                  <Image src={solution.image} alt={solution.title} fill className="object-cover" />
+                  <Image src={solution.image} alt={solution.title} fill unoptimized className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
               </div>

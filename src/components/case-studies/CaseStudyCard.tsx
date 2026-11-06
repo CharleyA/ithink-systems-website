@@ -32,6 +32,7 @@ export function CaseStudyCard({ caseStudy, index }: CaseStudyCardProps) {
           src={caseStudy.image}
           alt={caseStudy.title}
           fill
+          unoptimized
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />

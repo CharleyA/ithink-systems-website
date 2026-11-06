@@ -5,13 +5,8 @@ const LOADER = path.resolve(__dirname, "src/visual-edits/component-tagger-loader
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "ui-avatars.com" },
-      { protocol: "https", hostname: "slelguoygbfzlpylpxfs.supabase.co" },
-      { protocol: "https", hostname: "**" }, // optional: remove later
-      { protocol: "http", hostname: "**" },  // optional: remove later
-    ],
+    // Local files only. An empty list blocks /_next/image from fetching any remote host.
+    remotePatterns: [],
   },
 
   outputFileTracingRoot: path.resolve(__dirname, "../../"),
