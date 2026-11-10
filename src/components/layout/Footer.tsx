@@ -4,6 +4,14 @@ import { Facebook, Github, Linkedin } from "lucide-react";
 import { facebookUrl } from "@/lib/site-contact";
 
 const navigation = {
+  company: [
+    { name: "About Us", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Products", href: "/products" },
+    { name: "Blog", href: "/blog" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Contact", href: "/contact" },
+  ],
   solutions: [
     { name: "Healthcare Systems", href: "/solutions#healthcare" },
     { name: "Education Platforms", href: "/solutions#education" },
@@ -18,19 +26,18 @@ const navigation = {
     { name: "Custom Software", href: "/custom-software-development-zimbabwe" },
     { name: "Hosting & Deployment", href: "/hosting-services-zimbabwe" },
   ],
-  company: [
-    { name: "About Us", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Products", href: "/products" },
-    { name: "Blog", href: "/blog" },
-    { name: "Case Studies", href: "/case-studies" },
-    { name: "Contact", href: "/contact" },
-  ],
   legal: [
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Terms of Service", href: "/terms" },
   ],
 };
+
+const linkColumns = [
+  { title: "Company", items: navigation.company },
+  { title: "Solutions", items: navigation.solutions },
+  { title: "Build & Delivery", items: navigation.build },
+  { title: "Legal", items: navigation.legal },
+];
 
 export function Footer() {
   return (
@@ -39,8 +46,8 @@ export function Footer() {
         Footer
       </h2>
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-16 lg:grid-cols-5 lg:gap-x-6 lg:gap-y-0 xl:gap-x-8">
+          <div className="col-span-2 space-y-8 lg:col-span-1">
             <Logo />
             <p className="text-sm leading-6 text-muted-foreground">
               Empowering innovation in Zimbabwe through professional technology solutions. Specializing in Healthcare, Education, and AI.
@@ -74,60 +81,20 @@ export function Footer() {
               </Link>
             </div>
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-foreground">Solutions</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.solutions.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-foreground">Build & Delivery</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.build.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-foreground">Company</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {linkColumns.map((column) => (
+            <div key={column.title}>
+              <h3 className="text-sm font-semibold leading-6 text-foreground">{column.title}</h3>
+              <ul role="list" className="mt-6 space-y-4">
+                {column.items.map((item) => (
+                  <li key={item.name}>
+                    <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-foreground">Legal</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.legal.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-muted-foreground hover:text-primary">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         <div className="mt-16 border-t border-foreground/10 pt-8 sm:mt-20 lg:mt-24">
           <p className="text-xs leading-5 text-muted-foreground">
