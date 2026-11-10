@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Facebook, Github, Linkedin } from "lucide-react";
-import { facebookUrl } from "@/lib/site-contact";
+import { facebookUrl, linkedinUrl } from "@/lib/site-contact";
 
 const navigation = {
   company: [
@@ -62,7 +62,8 @@ export function Footer() {
                 <span className="sr-only">Facebook</span>
                 <Facebook className="h-6 w-6" />
               </Link>
-              <Link href="https://www.linkedin.com/in/nhlanhla-ndlovu-7772442bb?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              <Link
+                href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary"

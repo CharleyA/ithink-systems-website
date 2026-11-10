@@ -9,6 +9,7 @@ import {
   Linkedin
 } from "lucide-react";
 import Link from "next/link";
+import { linkedinUrl } from "@/lib/site-contact";
 
 const values = [
   {
@@ -148,7 +149,10 @@ export default function AboutPage() {
                 <p className="text-sm font-semibold leading-6 text-primary">{person.role}</p>
                 <p className="mt-4 text-center text-muted-foreground px-4">{person.bio}</p>
                 <div className="mt-6 flex gap-4">
-                  <Link href="#" className="text-muted-foreground hover:text-primary"><Linkedin className="h-5 w-5" /></Link>
+                  <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+                    <span className="sr-only">LinkedIn</span>
+                    <Linkedin className="h-5 w-5" />
+                  </Link>
                 </div>
               </li>
             ))}
