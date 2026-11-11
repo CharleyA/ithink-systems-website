@@ -9,6 +9,7 @@ import {
   Linkedin
 } from "lucide-react";
 import Link from "next/link";
+import { linkedinUrl } from "@/lib/site-contact";
 
 const values = [
   {
@@ -58,12 +59,6 @@ const values = [
       role: "Projects Director",
       image: "/images/team/lungelo-pic.jpeg?width=800&height=800&resize=cover",
       bio: "Overseeing project delivery and client success across all implementations."
-    },
-    {
-      name: "Christopher Matambanadzo",
-      role: "Implementation Officer",
-      image: "/images/team/christopher-matambanadzo.jpeg",
-      bio: "Supporting successful system rollouts, user onboarding, and client adoption."
     }
   ];
 
@@ -139,9 +134,9 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Leadership Team</h2>
             <p className="mt-4 text-lg text-muted-foreground">Professionals dedicated to building robust technological foundations for Zimbabwe.</p>
           </div>
-          <ul role="list" className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <ul role="list" className="mx-auto mt-20 flex max-w-2xl flex-wrap justify-center gap-x-8 gap-y-16 sm:max-w-none lg:mx-0">
             {team.map((person) => (
-              <li key={person.name} className="flex flex-col items-center">
+              <li key={person.name} className="flex w-full flex-col items-center sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]">
 <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-primary/20 p-2">
                     <Image
                       src={person.image}
@@ -154,7 +149,10 @@ export default function AboutPage() {
                 <p className="text-sm font-semibold leading-6 text-primary">{person.role}</p>
                 <p className="mt-4 text-center text-muted-foreground px-4">{person.bio}</p>
                 <div className="mt-6 flex gap-4">
-                  <Link href="#" className="text-muted-foreground hover:text-primary"><Linkedin className="h-5 w-5" /></Link>
+                  <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+                    <span className="sr-only">LinkedIn</span>
+                    <Linkedin className="h-5 w-5" />
+                  </Link>
                 </div>
               </li>
             ))}
